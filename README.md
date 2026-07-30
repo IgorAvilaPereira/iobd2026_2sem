@@ -9,3 +9,6 @@
 [setup](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./01_introducao/setup) <br>
 [slides_importantes](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./01_introducao/slides_importantes) <br>
 [videos](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./01_introducao/videos) <br>
+## [./02_lista1_sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./02_lista1_sql) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/02_lista1_sql) <br><br>
+&nbsp;
