@@ -126,6 +126,9 @@ INSERT INTO artista (id, nome) VALUES
 
 -- 3. ALBUM
 INSERT INTO album (id, titulo, data_lancamento, genero_id) VALUES
+(21, 'Album do Igor', CURRENT_DATE, 2);
+
+INSERT INTO album (id, titulo, data_lancamento, genero_id) VALUES
 (1, 'Clube da Esquina', '1972-03-01', 2),
 (2, 'Transa', '1972-01-01', 11),
 (3, 'Elis & Tom', '1974-08-01', 4),
@@ -332,5 +335,55 @@ INSERT INTO reproducao (musica_id, usuario_id, quando) VALUES
 (2, 19, '2026-07-18 01:00:00');
 
 
+/*
 select usuario.id, usuario.email, usuario.nome, musica.nome, reproducao.quando FROM usuario INNER JOIN reproducao ON usuario.id = reproducao.usuario_id INNER JOIN musica ON musica.id = reproducao.musica_id where usuario.id = 1;
+*/
+
+-- 1/2)
+-- SELECT id, nome, email FROM usuario ORDER BY nome;
+
+-- 3)
+-- SELECT * FROM usuario WHERE data_nascimento > '1998-01-01' ORDER BY nome ASC;
+
+-- 4)
+-- Select nome, publica from playlist where publica is true;
+
+
+-- 5)
+-- a) SELECT * FROM musica WHERE duracao > '00:05:00';
+-- b) SELECT * FROM musica WHERE extract(minutes from duracao) >= 5 and extract(seconds from duracao) > 0;
+
+-- 6)
+-- a) select * from album where data_lancamento >= '1980-01-01';
+-- b) select * from album where extract(year from data_lancamento) >= 1980;
+-- c) SELECT album.titulo, to_char(data_lancamento, 'DD/MM/YYYY') AS data_lancamento, genero.nome FROM album JOIN genero ON album.genero_id = genero.id where extract(year from data_lancamento) < 1980 order by album.titulo;
+
+
+-- 7) SELECT * FROM artista ORDER BY nome DESC;
+
+-- 8) SELECT * FROM musica where extract(year from data_hora_lancamento) > 1990 order by musica.nome;
+
+-- 9) SELECT * FROM genero;
+
+-- 10) SELECT * FROM playlist where publica is FALSE;
+
+-- 11) SELECT usuario.nome, playlist.nome FROM usuario JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id JOIN playlist ON usuario_playlist.playlist_id = playlist.id WHERE dono IS TRUE;
+
+-- 12)
+-- aqui apenas lista albuns com pelo menos uma musica
+-- select album.titulo, musica.nome FROM album JOIN album_musica ON album.id = album_musica.album_id JOIN musica ON musica.id = album_musica.musica_id ORDER BY album.id;
+
+-- aqui tb lista albuns sem musicas
+-- select album.titulo, musica.nome FROM album LEFT JOIN album_musica ON album.id = album_musica.album_id LEFT JOIN musica ON musica.id = album_musica.musica_id ORDER BY album.id;
+
+-- 13) vide 6
+
+-- 14) SELECT artista.nome, album.titulo FROM artista JOIN album_artista ON artista.id = album_artista.artista_id JOIN album ON album.id = album_artista.album_id;
+
+-- 15) SELECT usuario.id, usuario.nome, musica.nome FROM usuario JOIN reproducao ON usuario.id = reproducao.usuario_id JOIN musica ON musica.id = reproducao.musica_id;
+
+-- 16) select musica.nome, playlist.nome FROM playlist JOIN playlist_musica ON playlist.id = playlist_musica.playlist_id JOIN musica ON musica.id = playlist_musica.musica_id;
+
+-- off-topic: materia nova (group by): SELECT playlist.id, playlist.nome, count(musica.id) FROM playlist JOIN playlist_musica ON playlist.id = playlist_musica.playlist_id JOIN musica ON musica.id = playlist_musica.musica_id GROUP BY playlist.id HAVING count(musica.id) > 3;
+
 
