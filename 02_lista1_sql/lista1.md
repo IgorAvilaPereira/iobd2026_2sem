@@ -10,7 +10,7 @@ Base de dados: **spoti_pobre**.
 
 # Exercício 1
 
-**Liste o nome e o e-mail de todos os usuários.**
+Liste o nome e o e-mail de todos os usuários.
 
 
 
