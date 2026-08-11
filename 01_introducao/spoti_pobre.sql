@@ -124,6 +124,9 @@ INSERT INTO artista (nome) VALUES
 ( 'Gal Costa'),
 ( 'Cazuza');
 
+INSERT INTO artista (nome) VALUES
+( 'IGOR VOZ E VIOLÃO');
+
 -- 3. ALBUM
 /*
 INSERT INTO album (titulo, data_lancamento, genero_id) VALUES
@@ -151,6 +154,8 @@ INSERT INTO album (titulo, data_lancamento, genero_id) VALUES
 ( 'Ideologia', '1988-04-01', 17),
 ('Tropicalia ou Panis et Circencis', '1968-07-01', 11);
 
+INSERT INTO album (titulo) VALUES ('AS MELHORES DO IGOR');
+
 -- 4. MUSICA
 INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
 ('Tudo O Que Você Podia Ser', '00:02:56', '1972-03-01 00:00:00'),
@@ -173,6 +178,10 @@ INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
 ( 'Garota de Ipanema', '00:05:19', '1964-03-01 00:00:00'),
 ('Ideologia', '00:04:06', '1988-04-01 00:00:00'),
 ( 'Alegria, Alegria', '00:02:43', '1968-07-01 00:00:00');
+
+
+INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
+('Águas de Março', '00:05:00', CURRENT_TIMESTAMP);
 
 -- 5. ALBUM_ARTISTA
 INSERT INTO album_artista (album_id, artista_id) VALUES
@@ -197,6 +206,9 @@ INSERT INTO album_artista (album_id, artista_id) VALUES
 (18, 6),
 (19, 20);
 
+INSERT INTO album_artista (album_id, artista_id) VALUES
+(21,21);
+
 -- 6. ALBUM_MUSICA
 INSERT INTO album_musica (album_id, musica_id) VALUES
 (1, 1),
@@ -220,7 +232,15 @@ INSERT INTO album_musica (album_id, musica_id) VALUES
 (19, 19),
 (20, 20);
 
+
+INSERT INTO album_musica (album_id, musica_id) VALUES
+(21,21);
+
 -- 7. USUARIO
+
+INSERT INTO usuario (email, senha, nome, data_nascimento) VALUES
+('rafael.betito@riogrande.ifrs.edu.br', md5('123'), 'Rafael Betito', '1995-03-15');
+
 INSERT INTO usuario (email, senha, nome, data_nascimento) VALUES
 ('joao.silva@email.com', '$2a$12$eImiTXuWVxfM37uY4JANjO', 'João Silva', '1995-03-15'),
 ('maria.oliveira@email.com', '$2a$12$eImiTXuWVxfM37uY4JANjO', 'Maria Oliveira', '1998-07-22'),
@@ -387,4 +407,40 @@ select usuario.id, usuario.email, usuario.nome, musica.nome, reproducao.quando F
 
 -- off-topic: materia nova (group by): SELECT playlist.id, playlist.nome, count(musica.id) FROM playlist JOIN playlist_musica ON playlist.id = playlist_musica.playlist_id JOIN musica ON musica.id = playlist_musica.musica_id GROUP BY playlist.id HAVING count(musica.id) > 3;
 
+-- 17)
+--SELECT album.titulo, musica.nome as musica_titulo, STRING_AGG(artista.nome, ',') as artista_nome, count(artista.id) FROM musica 
+--    JOIN album_musica ON musica.id = album_musica.musica_id     
+--    JOIN album ON album.id = album_musica.album_id 
+--    JOIN album_artista ON album.id = album_artista.album_id 
+--    JOIN artista ON artista.id = album_artista.artista_id 
+--    GROUP BY musica.id, album.titulo ORDER BY musica_titulo, artista_nome;
 
+-- 18)
+--SELECT album.titulo, musica.nome as musica_titulo, STRING_AGG(artista.nome, ',') as artista_nome, genero.nome FROM musica 
+--    JOIN album_musica ON musica.id = album_musica.musica_id     
+--    JOIN album ON album.id = album_musica.album_id 
+--    JOIN album_artista ON album.id = album_artista.album_id 
+--    JOIN artista ON artista.id = album_artista.artista_id 
+--    LEFT JOIN genero ON genero.id = album.genero_id
+--    GROUP BY musica.id, album.titulo, genero.nome ORDER BY album.titulo, musica_titulo, artista_nome;
+--
+
+-- 19)
+--SELECT usuario.id, usuario.nome, album.titulo, musica.nome, to_char(quando, 'DD/MM/YYYY HH24:MI:SS') as quando FROM usuario 
+--    JOIN reproducao on usuario.id = reproducao.usuario_id 
+--    JOIN musica ON musica.id = reproducao.musica_id 
+--    LEFT JOIN album_musica ON musica.id = album_musica.musica_id JOIN album ON album.id = album_musica.album_id 
+--    ORDER BY reproducao.quando ASC;
+
+-- jump 20) schemas para o proxima aula
+
+-- 21)
+-- OPCAO 1
+--SELECT usuario.id, usuario.nome, playlist.id, playlist.nome FROM usuario LEFT JOIN usuario_playlist on usuario.id = usuario_playlist.usuario_id LEFT JOIN playlist ON playlist.id = usuario_playlist.playlist_id
+
+--EXCEPT
+
+-- OPCAO 2
+--(SELECT usuario.id, usuario.nome, playlist.id, playlist.nome FROM usuario  JOIN usuario_playlist on usuario.id = usuario_playlist.usuario_id JOIN playlist ON playlist.id = usuario_playlist.playlist_id
+--UNION
+--SELECT usuario.id, usuario.nome, NULL, NULL FROM usuario WHERE usuario.id not in (select usuario_id from usuario_playlist));
