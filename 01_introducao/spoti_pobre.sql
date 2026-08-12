@@ -265,6 +265,9 @@ INSERT INTO usuario (email, senha, nome, data_nascimento) VALUES
 
 -- 8. PLAYLIST
 INSERT INTO playlist (nome, data_hora_criacao, publica) VALUES
+( 'playlist sem dono', '2023-01-10 14:00:00', true);
+
+INSERT INTO playlist (nome, data_hora_criacao, publica) VALUES
 ( 'MPB Essencial', '2023-01-10 14:00:00', true),
 ('Clássicos do Samba', '2023-02-15 18:30:00', true),
 ( 'Rock Nacional Anos 80 e 90', '2023-03-01 08:00:00', true),
@@ -287,6 +290,9 @@ INSERT INTO playlist (nome, data_hora_criacao, publica) VALUES
 ( 'Festival MPB Ao Vivo', '2023-12-15 14:15:00', true);
 
 -- 9. USUARIO_PLAYLIST
+INSERT INTO usuario_playlist (usuario_id, playlist_id, dono, colaborador) VALUES
+(21, 21, false, true);
+
 INSERT INTO usuario_playlist (usuario_id, playlist_id, dono, colaborador) VALUES
 (1, 1, true, false),
 (2, 2, true, false),
@@ -438,9 +444,38 @@ select usuario.id, usuario.email, usuario.nome, musica.nome, reproducao.quando F
 -- OPCAO 1
 --SELECT usuario.id, usuario.nome, playlist.id, playlist.nome FROM usuario LEFT JOIN usuario_playlist on usuario.id = usuario_playlist.usuario_id LEFT JOIN playlist ON playlist.id = usuario_playlist.playlist_id
 
---EXCEPT
+-- substracao
+
+--EXCEPT 
 
 -- OPCAO 2
 --(SELECT usuario.id, usuario.nome, playlist.id, playlist.nome FROM usuario  JOIN usuario_playlist on usuario.id = usuario_playlist.usuario_id JOIN playlist ON playlist.id = usuario_playlist.playlist_id
 --UNION
 --SELECT usuario.id, usuario.nome, NULL, NULL FROM usuario WHERE usuario.id not in (select usuario_id from usuario_playlist));
+
+
+-- 22)
+SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario right JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id right JOIN playlist ON playlist.id = usuario_playlist.playlist_id where usuario.nome is null or dono is true;
+
+
+-- 23)
+-- ja feito
+
+-- 24) 
+-- ja feito
+
+-- 25)
+-- ja feito
+
+-- 26) SELECT musica.id, musica.nome, case when reproducao.quando IS NOT NULL THEN 'FOI REPRODUZIDA' ELSE 'NENHUMA VEZ REPRODUZIDA' END FROM musica LEFT JOIN reproducao on musica.id = reproducao.musica_id;
+
+-- 27) SELECT usuario.id, usuario.nome, musica.nome FROM usuario JOIN reproducao ON usuario.id = reproducao.usuario_id JOIN musica ON musica.id = reproducao.musica_id;
+
+-- 28) ja feito
+
+-- 29)  
+-- select playlist.id, playlist.nome, count(musica_id) as qtde FROM playlist JOIN playlist_musica on playlist.id = playlist_musica.playlist_id GROUP BY playlist.id, playlist.nome ORDER BY playlist.id;
+
+-- 30) select usuario.id, usuario.nome, count(playlist_id) as qtde FROM usuario LEFT JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id group by usuario.id, usuario.nome ORDER BY qtde;
+
+
