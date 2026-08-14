@@ -15,3 +15,6 @@
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/02_lista1_sql) <br><br>
 &nbsp;
 [spoti_pobre](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./02_lista1_sql/spoti_pobre) <br>
+## [./03_continuacao_lista1_sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./03_continuacao_lista1_sql) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/03_continuacao_lista1_sql) <br><br>
+&nbsp;
