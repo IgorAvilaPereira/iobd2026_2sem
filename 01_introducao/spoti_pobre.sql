@@ -42,10 +42,11 @@ CREATE TABLE playlist_musica (
 
 
 CREATE TABLE reproducao (
-    musica_id integer references musica (id),
-    usuario_id integer references usuario (id),
-    quando timestamp default current_timestamp,
-    primary key (musica_id, usuario_id)
+    id serial primary key, -- pk
+    musica_id integer references musica (id), -- fk1
+    usuario_id integer references usuario (id), -- fk2 
+    quando timestamp default current_timestamp, 
+    unique (usuario_id, quando) 
 );  
 
 CREATE TABLE genero (
@@ -156,6 +157,10 @@ INSERT INTO album (titulo, data_lancamento, genero_id) VALUES
 
 INSERT INTO album (titulo) VALUES ('AS MELHORES DO IGOR');
 
+INSERT INTO album (titulo) VALUES ('DJAVAN - Só romanticas');
+
+INSERT INTO album (titulo) VALUES ('DJAVAN - Só novelas');
+
 -- 4. MUSICA
 INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
 ('Tudo O Que Você Podia Ser', '00:02:56', '1972-03-01 00:00:00'),
@@ -181,7 +186,7 @@ INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
 
 
 INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
-('Águas de Março', '00:05:00', CURRENT_TIMESTAMP);
+('Samba Elis e Tom', '00:05:00', CURRENT_TIMESTAMP);
 
 -- 5. ALBUM_ARTISTA
 INSERT INTO album_artista (album_id, artista_id) VALUES
@@ -208,6 +213,12 @@ INSERT INTO album_artista (album_id, artista_id) VALUES
 
 INSERT INTO album_artista (album_id, artista_id) VALUES
 (21,21);
+
+INSERT INTO album_artista (album_id, artista_id) VALUES
+(22, 18);
+
+INSERT INTO album_artista (album_id, artista_id) VALUES
+(23, 18);
 
 -- 6. ALBUM_MUSICA
 INSERT INTO album_musica (album_id, musica_id) VALUES
@@ -266,6 +277,8 @@ INSERT INTO usuario (email, senha, nome, data_nascimento) VALUES
 -- 8. PLAYLIST
 INSERT INTO playlist (nome, data_hora_criacao, publica) VALUES
 ( 'playlist sem dono', '2023-01-10 14:00:00', true);
+
+
 
 INSERT INTO playlist (nome, data_hora_criacao, publica) VALUES
 ( 'MPB Essencial', '2023-01-10 14:00:00', true),
@@ -361,6 +374,8 @@ INSERT INTO reproducao (musica_id, usuario_id, quando) VALUES
 (5, 18, '2026-07-17 18:45:00'),
 (2, 19, '2026-07-18 01:00:00');
 
+INSERT INTO reproducao (musica_id, usuario_id, quando) VALUES
+(1, 1, CURRENT_TIMESTAMP);
 
 /*
 select usuario.id, usuario.email, usuario.nome, musica.nome, reproducao.quando FROM usuario INNER JOIN reproducao ON usuario.id = reproducao.usuario_id INNER JOIN musica ON musica.id = reproducao.musica_id where usuario.id = 1;
@@ -477,5 +492,42 @@ SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario r
 -- select playlist.id, playlist.nome, count(musica_id) as qtde FROM playlist JOIN playlist_musica on playlist.id = playlist_musica.playlist_id GROUP BY playlist.id, playlist.nome ORDER BY playlist.id;
 
 -- 30) select usuario.id, usuario.nome, count(playlist_id) as qtde FROM usuario LEFT JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id group by usuario.id, usuario.nome ORDER BY qtde;
+
+
+-- 31) select usuario.nome, playlist.nome FROM usuario RIGHT JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id RIGHT JOIN playlist ON playlist.id = usuario_playlist.playlist_id;
+
+
+-- 32)  select nome, to_char(quando, 'DD/MM/YYYY HH24:MI:SS') as quando FROM musica m JOIN reproducao r ON m.id = r.musica_id ORDER BY m.nome ASC;
+
+-- 33) select count(*) from usuario;
+
+-- 34) select count(*) from playlist;
+
+
+-- 35) SELECT album.id, album.titulo, count(album_musica.musica_id) as qtde FROM album JOIN album_musica ON album.id = album_musica.album_id GROUP by album.id, album.titulo ORDER BY count(album_musica.musica_id) DESC;
+
+-- 36) select artista_id, artista.nome, count(*) as qtde FROM album_artista INNER JOIN artista ON album_artista.artista_id = artista.id GROUP BY artista_id, artista.nome;
+
+-- 37) select usuario.id, usuario.nome, count(playlist_id) FROM usuario_playlist RIGHT JOIN usuario ON usuario.id = usuario_playlist.usuario_id GROUP BY usuario.id, nome ORDER BY usuario.id;
+
+-- 38)  SELECT to_char(AVG(duracao), 'HH24:MI:SS') AS media FROM musica;
+
+-- 39) SELECT max(duracao), min(duracao), to_char(AVG(duracao), 'HH24:MI:SS') AS media FROM musica;
+
+-- 40) SELECT artista.id, artista.nome, count(album_artista.album_id) as qtde_album, count(album_musica.musica_id) as qtde_musica, count(album.genero_id) as qtde_genero FROM artista JOIN album_artista ON artista.id = album_artista.artista_id JOIN album ON album.id = album_artista.album_id LEFT JOIN album_musica ON album.id = album_musica.musica_id GROUP BY artista.id, artista.nome;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
