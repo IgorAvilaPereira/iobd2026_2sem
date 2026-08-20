@@ -10,5 +10,6 @@
 
 * [Playlist com vídeos sobre JDBC, DAO e ORM](https://youtube.com/playlist?list=PLvT8P1q6jMWf_Epq_VhCgupInovZGdSZ-&si=YWavfUkW4eWIn3U6)
 
+* [Encontro 19/08/26](https://youtu.be/zJg2PHhgumc)
  
 [Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2025_1sem/tree/main/./videos)
