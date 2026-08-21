@@ -1,5 +1,4 @@
-
-## 📋 Escopo do Trabalho: Sistema Web SpotiPobre (Java + Javalin + Mustache + Postgres)
+## Trabalho 1: Sistema Web SpotiPobre (Java + Javalin + Mustache + Postgres)
 
 A aplicação consiste em um sistema web onde o Javalin processa as requisições, interage com o PostgreSQL através do JDBC nativo e exibe os resultados na tela por meio de templates do Mustache.
 
