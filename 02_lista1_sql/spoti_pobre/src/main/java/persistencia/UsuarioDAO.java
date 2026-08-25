@@ -21,7 +21,7 @@ public class UsuarioDAO {
         while (rs.next()) {
             Usuario usuario = new Usuario();
             usuario.setId(rs.getInt("id"));
-            usuario.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+            usuario.setDataNascimento((rs.getDate("data_nascimento") != null) ? rs.getDate("data_nascimento").toLocalDate() : null);
             usuario.setEmail(rs.getString("email"));
             usuario.setNome(rs.getString("nome"));
             // usuario.setSenha(rs.getString("senha"));
@@ -49,16 +49,17 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public void salvar(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuario (email, senha, nome, data_nascimento) VALUES (?,md5(?),?,?);";
+    public boolean salvar(Usuario usuario) throws SQLException {
+        String sql = "INSERT INTO usuario (email, senha, nome) VALUES (?,md5(?),?);";
         Connection conexao = new ConexaoPostgreSQL().getConexao();
         PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
         instrucaoSQL.setString(1, usuario.getEmail());
         instrucaoSQL.setString(2, usuario.getSenha());
         instrucaoSQL.setString(3, usuario.getNome());
-        instrucaoSQL.setDate(4, Date.valueOf(usuario.getDataNascimento()));
-        instrucaoSQL.execute();
+        // instrucaoSQL.setDate(4, Date.valueOf(usuario.getDataNascimento()));
+        int nroLinhasAfetadas = instrucaoSQL.executeUpdate();
         conexao.close();
+        return nroLinhasAfetadas == 1;
 
     }
 
@@ -71,17 +72,18 @@ public class UsuarioDAO {
         conexao.close();
     }
 
-    public void atualizar(Usuario usuario) throws SQLException {
-        String sql = "UPDATE usuario SET email = ?, senha = ?, nome = ?, data_nascimento = ? where id = ?;";
+    public boolean atualizar(Usuario usuario) throws SQLException {
+        String sql = "UPDATE usuario SET email = ?, senha = ?, nome = ? where id = ?;";
         Connection conexao = new ConexaoPostgreSQL().getConexao();
         PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
         instrucaoSQL.setString(1, usuario.getEmail());
         instrucaoSQL.setString(2, usuario.getSenha());
         instrucaoSQL.setString(3, usuario.getNome());
-        instrucaoSQL.setDate(4, Date.valueOf(usuario.getDataNascimento()));
-        instrucaoSQL.setInt(5, usuario.getId());
-        instrucaoSQL.execute();
+        // instrucaoSQL.setDate(4, Date.valueOf(usuario.getDataNascimento()));
+        instrucaoSQL.setInt(4, usuario.getId());
+        int nroLinhasAfetadas = instrucaoSQL.executeUpdate();
         conexao.close();
+        return nroLinhasAfetadas == 1;
 
     }
 
