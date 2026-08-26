@@ -54,16 +54,14 @@ public class Main {
                 String nome = ctx.formParam("nome");
                 String email = ctx.formParam("email");
                 String senha = ctx.formParam("senha");
-                // String dataNascimento = ctx.formParam("data_nascimento");
+                String dataNascimento = ctx.formParam("data_nascimento");
                 Usuario usuarioNovo = new Usuario();
                 usuarioNovo.setId(id);
                 usuarioNovo.setNome(nome);
                 usuarioNovo.setEmail(email);
-                usuarioNovo.setSenha(senha);
-                // usuarioNovo.setDataNascimento(null);
-
+                usuarioNovo.setSenha((senha.isBlank() || senha.isEmpty()) ? null : senha);
+                usuarioNovo.setDataNascimento(LocalDate.parse(dataNascimento));
                 boolean resultado = new UsuarioDAO().atualizar(usuarioNovo);
-
                 if (resultado) {
                     ctx.redirect("/");
                 }
@@ -84,12 +82,13 @@ public class Main {
                 String nome = ctx.formParam("nome");
                 String email = ctx.formParam("email");
                 String senha = ctx.formParam("senha");
-                // String dataNascimento = ctx.formParam("data_nascimento");
+                String dataNascimento = ctx.formParam("data_nascimento");
                 Usuario usuarioNovo = new Usuario();
                 usuarioNovo.setNome(nome);
                 usuarioNovo.setEmail(email);
                 usuarioNovo.setSenha(senha);
-                // usuarioNovo.setDataNascimento(null);
+                usuarioNovo.setDataNascimento(LocalDate.parse(dataNascimento));
+
 
                 boolean resultado = new UsuarioDAO().salvar(usuarioNovo);
 
