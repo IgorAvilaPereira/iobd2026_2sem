@@ -23,3 +23,6 @@ playlist javalin - https://www.youtube.com/playlist?list=PLvT8P1q6jMWdpBu0vENPe4
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/04_lista1_javalin) <br><br>
 &nbsp;
 [trabalho1.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./04_lista1_javalin/trabalho1.md) <br>
+## [./05_continuacao_lista1_sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./05_continuacao_lista1_sql) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/05_continuacao_lista1_sql) <br><br>
+&nbsp;
