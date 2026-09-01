@@ -48,6 +48,9 @@ CREATE TABLE reproducao (
     quando timestamp default current_timestamp, 
     unique (usuario_id, quando) 
 );  
+--alter table reproducao drop constraint reproducao_pkey;
+--alter table reproducao add primary key (musica_id, usuario_id, quando);
+
 
 CREATE TABLE genero (
     id serial primary key,
@@ -517,17 +520,47 @@ SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario r
 -- 40) SELECT artista.id, artista.nome, count(album_artista.album_id) as qtde_album, count(album_musica.musica_id) as qtde_musica, count(album.genero_id) as qtde_genero FROM artista JOIN album_artista ON artista.id = album_artista.artista_id JOIN album ON album.id = album_artista.album_id LEFT JOIN album_musica ON album.id = album_musica.musica_id GROUP BY artista.id, artista.nome;
 
 
+-- 41) SELECT artista_id, artista.nome, count(*) FROM album_artista JOIN artista ON artista.id = album_artista.artista_id GROUP BY artista_id, artista.nome HAVING count(album_id) >= 2 ORDER BY artista_id; 
 
 
+-- 42) select usuario_id, usuario.nome, count(playlist_id) FROM usuario INNER JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id GROUP BY usuario_id, usuario.nome HAVING count(playlist_id) >= 2;
+
+-- 43) select a.id, a.nome, count(am.musica_id) FROM artista a JOIN album_artista aa ON a.id = aa.artista_id JOIN album al ON al.id = aa.album_id JOIN album_musica am ON am.album_id = a.id GROUP BY a.id, a.nome, am.musica_id HAVING count(am.musica_id) >= 2; 
 
 
+-- 44) jump
+
+-- 45) jump
+
+-- 46) select usuario.id, usuario.nome, to_char(data_nascimento, 'DD/MM/YYYY') as data_nascimento, EXTRACT(YEARS FROM AGE(usuario.data_nascimento)) AS idade from usuario ORDER BY idade;
 
 
+-- 47) select AVG(EXTRACT(YEARS FROM AGE(usuario.data_nascimento)))::integer AS media from usuario;
+
+-- 48) 
+
+-- 49) select * from musica WHERE extract(year from data_hora_lancamento) between 1970 and 1980; 
+
+-- 50) 
+--select 
+--            usuario_id, usuario.nome, 
+--            musica_id, musica.nome, 
+--      CASE 
+--        WHEN extract(dow from quando) = 0 then 'domingo' 
+--        WHEN extract(dow from quando) = 1 then 'segunda'
+--        WHEN extract(dow from quando) = 2 then 'terça'
+--        WHEN extract(dow from quando) = 3 then 'quarta'
+--        WHEN extract(dow from quando) = 4 then 'quinta'
+--        WHEN extract(dow from quando) = 5 then 'sexta'  
+--        WHEN extract(dow from quando) = 6 then 'sabado'    
+--     end as dia_da_semana
+--     FROM reproducao INNER JOIN usuario ON usuario.id = reproducao.usuario_id INNER JOIN musica ON musica.id = reproducao.musica_id;
 
 
+-- 54) SELECT initcap(usuario.nome) as nome FROM usuario ORDER BY initcap(usuario.nome) asc;
 
+-- 55) SELECT CONCAT(id, ';', nome, ';', email, ';', COALESCE(data_nascimento::TEXT, 'NAO TEM')) FROM usuario;
 
-
-
+-- 56) SELECT SUBSTRING(musica.nome,1,5)||'...' from musica;
 
 
