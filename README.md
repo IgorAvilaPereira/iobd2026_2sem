@@ -26,3 +26,6 @@ playlist javalin - https://www.youtube.com/playlist?list=PLvT8P1q6jMWdpBu0vENPe4
 ## [./05_continuacao_lista1_sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./05_continuacao_lista1_sql) <br>
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/05_continuacao_lista1_sql) <br><br>
 &nbsp;
+## [./06_continuacao_lista1_sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./06_continuacao_lista1_sql) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/06_continuacao_lista1_sql) <br><br>
+&nbsp;
