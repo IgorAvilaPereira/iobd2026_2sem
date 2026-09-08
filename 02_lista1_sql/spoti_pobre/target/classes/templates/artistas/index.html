@@ -132,21 +132,21 @@
 
 <body>
     <div class="container">
-        <h1>Lista de Usuários</h1>
+        <h1>Lista de Artistas</h1>
 
         <ul class="user-list">
-            {{#vetUsuario}}
+            {{#vetArtista}}
             <li>
                 <span class="user-name">{{nome}}</span>
                 <div class="actions">
-                    <a href="/usuarios/tela_alterar/{{id}}" class="btn btn-edit">Alterar</a>
-                    <a href="/usuarios/excluir/{{id}}" class="btn btn-delete">Excluir</a>
+                    <a href="/artistas/tela_alterar/{{id}}" class="btn btn-edit">Alterar</a>
+                    <a href="/artistas/excluir/{{id}}" class="btn btn-delete">Excluir</a>
                 </div>
             </li>
-            {{/vetUsuario}}
+            {{/vetArtista}}
         </ul>
 
-        <a href="/usuarios/tela_adicionar" class="btn btn-add">+ Adicionar Usuário</a>
+        <a href="/artistas/tela_adicionar" class="btn btn-add">+ Adicionar</a>
                 <a href="/artistas/" class="btn btn-add">Artistas</a>
 
     </div>

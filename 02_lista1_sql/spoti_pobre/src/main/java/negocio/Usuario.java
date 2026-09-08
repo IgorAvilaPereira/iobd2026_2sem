@@ -8,9 +8,7 @@ public class Usuario {
     private String senha;
     private String email;
     private LocalDate dataNascimento;
-    
-
-    
+     
 
     public int getId() {
         return id;
