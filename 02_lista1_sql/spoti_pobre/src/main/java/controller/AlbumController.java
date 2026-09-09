@@ -16,6 +16,7 @@ public class AlbumController {
 
     public AlbumController(JavalinConfig config) {
          config.routes.get("/albuns/", ctx -> {
+            
             ArrayList<Album> vet = new AlbumDAO().listar();
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("vetAlbum", vet);
