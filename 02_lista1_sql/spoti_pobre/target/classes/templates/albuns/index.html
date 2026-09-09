@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Usuários</title>
+    <title>Gerenciamento de Albuns</title>
     <style>
         :root {
             --bg-color: #f4f6f9;
@@ -132,24 +132,22 @@
 
 <body>
     <div class="container">
-        <h1>Lista de Usuários</h1>
+        <h1>Lista de Albuns</h1>
 
         <ul class="user-list">
-            {{#vetUsuario}}
+            {{#vetAlbum}}
             <li>
-                <span class="user-name">{{nome}}</span>
+                <span class="user-name">{{titulo}} - {{genero.nome}} - {{artistasToString}}</span>
                 <div class="actions">
-                    <a href="/usuarios/tela_alterar/{{id}}" class="btn btn-edit">Alterar</a>
-                    <a href="/usuarios/excluir/{{id}}" class="btn btn-delete">Excluir</a>
+                    <a href="/albuns/tela_alterar/{{id}}" class="btn btn-edit">Alterar</a>
+                    <a href="/albuns/excluir/{{id}}" class="btn btn-delete">Excluir</a>
                 </div>
             </li>
-            {{/vetUsuario}}
+            {{/vetAlbum}}
         </ul>
 
-        <a href="/usuarios/tela_adicionar" class="btn btn-add">+ Adicionar Usuário</a>
-                <a href="/artistas/" class="btn btn-add">Artistas</a>
-                                <a href="/generos/" class="btn btn-add">Gêneros</a>
-
+        <a href="/albuns/tela_adicionar" class="btn btn-add">+ Adicionar</a>
+                <a href="/albuns/" class="btn btn-add">Albuns</a>
 
     </div>
 </body>

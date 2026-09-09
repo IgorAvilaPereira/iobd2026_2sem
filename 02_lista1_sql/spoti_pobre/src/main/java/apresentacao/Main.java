@@ -12,6 +12,8 @@ public class Main {
             // config.staticFiles.add("/static", Location.CLASSPATH);
             new UsuarioController(config);
             new ArtistaController(config);
+            new GeneroController(config);
+            new AlbumController(config);
         }).start(7070);
     }
 }

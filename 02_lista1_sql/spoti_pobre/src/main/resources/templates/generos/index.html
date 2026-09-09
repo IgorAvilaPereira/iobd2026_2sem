@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Usuários</title>
+    <title>Gerenciamento de Gêneros</title>
     <style>
         :root {
             --bg-color: #f4f6f9;
@@ -132,24 +132,22 @@
 
 <body>
     <div class="container">
-        <h1>Lista de Usuários</h1>
+        <h1>Lista de Gêneros</h1>
 
         <ul class="user-list">
-            {{#vetUsuario}}
+            {{#vetGenero}}
             <li>
                 <span class="user-name">{{nome}}</span>
                 <div class="actions">
-                    <a href="/usuarios/tela_alterar/{{id}}" class="btn btn-edit">Alterar</a>
-                    <a href="/usuarios/excluir/{{id}}" class="btn btn-delete">Excluir</a>
+                    <a href="/generos/tela_alterar/{{id}}" class="btn btn-edit">Alterar</a>
+                    <a href="/generos/excluir/{{id}}" class="btn btn-delete">Excluir</a>
                 </div>
             </li>
-            {{/vetUsuario}}
+            {{/vetGenero}}
         </ul>
 
-        <a href="/usuarios/tela_adicionar" class="btn btn-add">+ Adicionar Usuário</a>
-                <a href="/artistas/" class="btn btn-add">Artistas</a>
-                                <a href="/generos/" class="btn btn-add">Gêneros</a>
-
+        <a href="/generos/tela_adicionar" class="btn btn-add">+ Adicionar</a>
+                <a href="/generos/" class="btn btn-add">Gêneros</a>
 
     </div>
 </body>

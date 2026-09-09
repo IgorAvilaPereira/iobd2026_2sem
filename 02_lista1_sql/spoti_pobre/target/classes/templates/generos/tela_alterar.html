@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Usuário</title>
+    <title>Alterar Gênero</title>
     <style>
         :root {
             --bg-color: #f4f6f9;
@@ -128,19 +128,19 @@
 
 <body>
     <div class="container">
-        <h1>Alterar Artista</h1>
+        <h1>Alterar Gênero</h1>
 
-        <form action="/artistas/alterar" method="post">
-            <input type="hidden" name="id" value="{{artista.id}}">
+        <form action="/generos/alterar" method="post">
+            <input type="hidden" name="id" value="{{genero.id}}">
 
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value="{{artista.nome}}" required>
+                <input type="text" id="nome" name="nome" value="{{genero.nome}}" required>
             </div>
 
            
             <div class="actions">
-                <a href="/artistas/" class="btn btn-back">Voltar</a>
+                <a href="/generos/" class="btn btn-back">Voltar</a>
                 <button type="submit" class="btn btn-submit">Salvar Alterações</button>
             </div>
         </form>

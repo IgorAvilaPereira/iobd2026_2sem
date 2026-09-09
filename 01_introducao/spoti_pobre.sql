@@ -4,6 +4,19 @@ CREATE DATABASE spoti_pobre;
 
 \c spoti_pobre;
 
+CREATE SCHEMA backup;
+
+SET search_path TO public, backup;
+
+CREATE TABLE backup.log (
+    id serial primary key, 
+    comentario text not null
+);
+INSERT INTO backup.log (comentario) VALUES('IGOR');
+CREATE VIEW backup.visao_no_esquema_backup AS select * from backup.log;
+ALTER TABLE backup.log ADD COLUMN data_hora timestamp default current_timestamp;
+
+
 CREATE TABLE usuario (
     id serial primary key,
     email character varying(200) unique not null,
@@ -191,6 +204,16 @@ INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
 INSERT INTO musica ( nome, duracao, data_hora_lancamento) VALUES
 ('Samba Elis e Tom', '00:05:00', CURRENT_TIMESTAMP);
 
+
+INSERT INTO musica ( nome, duracao, data_hora_lancamento) values
+('musica', '00:02:00', current_timestamp);
+INSERT INTO musica ( nome, duracao, data_hora_lancamento) values
+('musica', '00:02:00', current_timestamp);
+
+INSERT INTO musica ( nome, duracao, data_hora_lancamento) values
+('musica', '00:02:00', current_timestamp);
+
+
 -- 5. ALBUM_ARTISTA
 INSERT INTO album_artista (album_id, artista_id) VALUES
 (1, 7),
@@ -249,6 +272,9 @@ INSERT INTO album_musica (album_id, musica_id) VALUES
 
 INSERT INTO album_musica (album_id, musica_id) VALUES
 (21,21);
+
+INSERT INTO album_musica (album_id, musica_id) VALUES
+(1, 2);
 
 -- 7. USUARIO
 
@@ -562,5 +588,9 @@ SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario r
 -- 55) SELECT CONCAT(id, ';', nome, ';', email, ';', COALESCE(data_nascimento::TEXT, 'NAO TEM')) FROM usuario;
 
 -- 56) SELECT SUBSTRING(musica.nome,1,5)||'...' from musica;
+
+-- 57) 
+
+-- 60)select artista.nome, album.id, album.titulo, extract(year from data_lancamento), count(album_musica.musica_id) FROM album JOIN album_musica ON album.id = album_musica.album_id JOIN album_artista ON album.id = album_artista.album_id JOIN artista ON artista.id = album_artista.artista_id GROUP BY album.id, artista.nome HAVING count(album_musica.musica_id) >= 2;
 
 
