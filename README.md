@@ -49,6 +49,7 @@ playlist javalin - https://www.youtube.com/playlist?list=PLvT8P1q6jMWdpBu0vENPe4
 [log](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./06_continuacao_lista1_sql/log) <br>
 ## [./07_continuacao_lista1_sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./07_continuacao_lista1_sql) <br>
 [jdbc.pdf](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./07_continuacao_lista1_sql/jdbc.pdf) <br>
+[material_didatico_cte_postgresql.pdf](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./07_continuacao_lista1_sql/material_didatico_cte_postgresql.pdf) <br>
 * SCHEMA
 * COALESCE
 * CASE WHEN
