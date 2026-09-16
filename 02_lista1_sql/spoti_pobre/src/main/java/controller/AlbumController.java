@@ -7,7 +7,9 @@ import java.util.Map;
 
 import io.javalin.config.JavalinConfig;
 import negocio.Album;
+import negocio.Genero;
 import persistencia.AlbumDAO;
+import persistencia.GeneroDAO;
 
 /**
  * AlbumController
@@ -24,7 +26,9 @@ public class AlbumController {
         });
 
         config.routes.get("/albuns/tela_adicionar", ctx -> {
-            ctx.render("/templates/albuns/tela_adicionar.html");
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("vetGenero", new GeneroDAO().listar());
+            ctx.render("/templates/albuns/tela_adicionar.html", map);
         });
 
         config.routes.get("/albuns/tela_alterar/{id}", ctx -> {
@@ -56,10 +60,14 @@ public class AlbumController {
         });
 
         config.routes.post("/albuns/adicionar", ctx -> {
-            String nome = ctx.formParam("nome");
-            Album artistaNovo = new Album();
-            // artistaNovo.setNome(nome);
-            boolean resultado = new AlbumDAO().salvar(artistaNovo);
+            String titulo = ctx.formParam("titulo");
+            LocalDate dataLancamento = LocalDate.parse(ctx.formParam("data_lancamento"));
+            Genero genero = new GeneroDAO().obter(Integer.parseInt(ctx.formParam("genero_id")));
+            Album album = new Album();
+            album.setDataLancamento(dataLancamento);
+            album.setTitulo(titulo);
+            album.setGenero(genero);
+            boolean resultado = new AlbumDAO().salvar(album);
             if (resultado) {
                 ctx.redirect("/albuns/");
             } else {

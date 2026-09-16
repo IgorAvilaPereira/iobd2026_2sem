@@ -63,10 +63,12 @@ public class AlbumDAO {
     }
 
     public boolean salvar(Album album) throws SQLException {
-        String sql = "INSERT INTO album (nome) VALUES (?) RETURNING id;";
+        String sql = "INSERT INTO album (titulo, data_lancamento, genero_id) VALUES (?, ?, ?) RETURNING id;";
         Connection conexao = new ConexaoPostgreSQL().getConexao();
         PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
-        // instrucaoSQL.setString(1, album.getNome());
+        instrucaoSQL.setString(1, album.getTitulo());
+        instrucaoSQL.setDate(2, Date.valueOf(album.getDataLancamento()));
+        instrucaoSQL.setInt(3, album.getGenero().getId());
         ResultSet rs = instrucaoSQL.executeQuery();
         if (rs.next()) {
             album.setId(rs.getInt("id"));
