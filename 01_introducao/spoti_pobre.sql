@@ -593,4 +593,48 @@ SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario r
 
 -- 60)select artista.nome, album.id, album.titulo, extract(year from data_lancamento), count(album_musica.musica_id) FROM album JOIN album_musica ON album.id = album_musica.album_id JOIN album_artista ON album.id = album_artista.album_id JOIN artista ON artista.id = album_artista.artista_id GROUP BY album.id, artista.nome HAVING count(album_musica.musica_id) >= 2;
 
+-- 61) select * from usuario where id in (select usuario_id from reproducao);
+
+-- 62) select * from musica where id in (select musica_id from album_musica);
+--
+--with aa AS (
+--    select musica_id from album_musica
+--)
+--SELECT * FROM musica where id in (select musica_id from aa);
+
+-- 63) SELECT artista.id, artista.nome FROM artista JOIN album_artista ON artista.id = album_artista.artista_id where album_artista.album_id IN (SELECT album_id FROM album where extract(year from data_lancamento) < (SELECT CAST(AVG(extract(year from data_lancamento)) AS INTEGER) FROM album)) ORDER BY artista.id, artista.nome;
+
+-- 64) SELECT * FROM usuario where id not in (select usuario_id from reproducao);
+
+-- SELECT * FROM usuario LEFT JOIN reproducao ON usuario.id = reproducao.usuario_id WHERE reproducao.usuario_id IS NULL;
+
+-- SELECT * FROM usuario WHERE id in(SELECT usuario.id FROM usuario EXCEPT select usuario_id FROM reproducao);
+
+-- SELECT * FROM usuario where id not in(SELECT usuario_id FROM reproducao GROUP BY usuario_id);
+
+--SELECT * FROM reproducao RIGHT JOIN usuario ON usuario.id = reproducao.usuario_id WHERE reproducao.usuario_id IS NULL;
+
+--select * from usuario usuario_externo where NOT EXISTS(SELECT * FROM reproducao where usuario_externo.id = reproducao.usuario_id);
+
+-- 65) select * from playlist where id in (select playlist_id FROM playlist_musica GROUP By playlist_id HAVING count(*) > 0);
+
+--CREATE VIEW playlist_com_musica AS select playlist_id FROM playlist_musica GROUP By playlist_id HAVING count(*) > 0;
+--
+--select * from playlist where id in (select playlist_id FROM playlist_com_musica);
+--
+
+-- 66) select * from artista where id in (SELECT artista_id FROM album_artista where album_id IN (SELECT album_id FROM album where genero_id in (select id from genero where nome = 'MPB')));
+
+-- 67) select * from usuario fora where EXISTS(SELECT * FROM reproducao where fora.id = reproducao.usuario_id);
+
+-- 68)  select * from usuario usuario_externo where NOT EXISTS(SELECT * FROM reproducao where usuario_externo.id = reproducao.usuario_id);
+
+-- 69) 
+--
+--WITH musicas_por_playlist AS (
+--    SELECT playlist_id, count(*) as qtde FROM playlist_musica GROUP BY playlist_id
+--) SELECT * FROM playlist WHERE id IN (SELECT playlist_id FROM playlist_musica GROUP BY playlist_id HAVING count(*) >= (SELECT avg(qtde) as media FROM musicas_por_playlist));
+
+-- 70) SELECT * FROM album WHERE data_lancamento <= (SELECT MIN(data_lancamento) FROM album);
+
 
