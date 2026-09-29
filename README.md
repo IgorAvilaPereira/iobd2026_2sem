@@ -78,6 +78,9 @@ playlist javalin - https://www.youtube.com/playlist?list=PLvT8P1q6jMWdpBu0vENPe4
 
 * 20/10 -> 2 bim.
 
+
+[modelo relacional do spoti pobre](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/spotify_pobre.dia)
+
 [script.sql + resolução dos exercícios](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/spoti_pobre.sql)
 
 [projeto java](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/02_lista1_sql/spoti_pobre)
