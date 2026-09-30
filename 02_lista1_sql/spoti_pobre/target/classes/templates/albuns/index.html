@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gerenciamento de Álbuns</title>
+
+<style>
+    :root {
+        --bg-color: #f4f6f9;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+
+        --danger-color: #ef4444;
+        --danger-hover: #dc2626;
+
+        --warning-color: #f59e0b;
+        --warning-hover: #d97706;
+
+        --border-color: #e5e7eb;
+        --muted-color: #6b7280;
+
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f4f6f9, #eef2ff);
+        color: var(--text-color);
+
+        margin: 0;
+        padding: 40px 20px;
+
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 850px;
+
+        margin: auto;
+
+        background-color: var(--card-bg);
+
+        padding: 32px;
+
+        border-radius: 18px;
+
+        box-shadow: var(--shadow);
+    }
+
+    /* CABEÇALHO */
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 28px;
+        padding-bottom: 20px;
+
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .header h1 {
+        margin: 0;
+
+        font-size: 1.8rem;
+        color: #111827;
+    }
+
+    .header p {
+        margin: 6px 0 0;
+
+        font-size: 0.9rem;
+        color: var(--muted-color);
+    }
+
+    .header-icon {
+        width: 48px;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 12px;
+
+        background: #eef2ff;
+        color: var(--primary-color);
+
+        font-size: 1.5rem;
+    }
+
+    /* LISTA */
+
+    ul.album-list {
+        list-style: none;
+
+        padding: 0;
+        margin: 0 0 28px;
+    }
+
+    ul.album-list li {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+
+        padding: 16px;
+
+        margin-bottom: 14px;
+
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+
+        background: #ffffff;
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease;
+    }
+
+    ul.album-list li:hover {
+        transform: translateY(-2px);
+
+        border-color: #c7d2fe;
+
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    /* CAPA */
+
+    .album-cover {
+        width: 90px;
+        height: 90px;
+
+        flex-shrink: 0;
+
+        object-fit: cover;
+
+        border-radius: 10px;
+
+        background: #f3f4f6;
+
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    .album-cover-placeholder {
+        width: 90px;
+        height: 90px;
+
+        flex-shrink: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 10px;
+
+        background: #f3f4f6;
+
+        color: #9ca3af;
+
+        font-size: 0.8rem;
+    }
+
+    /* INFORMAÇÕES */
+
+    .album-info {
+        flex: 1;
+
+        min-width: 0;
+    }
+
+    .album-title {
+        display: block;
+
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        color: #111827;
+
+        margin-bottom: 7px;
+
+        word-break: break-word;
+    }
+
+    .album-details {
+        font-size: 0.9rem;
+
+        color: var(--muted-color);
+
+        line-height: 1.5;
+    }
+
+    .album-details strong {
+        color: #4b5563;
+    }
+
+    /* AÇÕES */
+
+    .actions {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: flex-end;
+
+        gap: 7px;
+    }
+
+    .btn {
+        text-decoration: none;
+
+        padding: 8px 12px;
+
+        border-radius: 8px;
+
+        font-size: 0.82rem;
+
+        font-weight: 600;
+
+        transition:
+            background-color 0.2s ease,
+            transform 0.1s ease,
+            box-shadow 0.2s ease;
+
+        display: inline-block;
+
+        text-align: center;
+
+        white-space: nowrap;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .btn:active {
+        transform: scale(0.97);
+    }
+
+    /* BOTÕES */
+
+    .btn-add {
+        background-color: var(--primary-color);
+
+        color: white;
+
+        padding: 12px 18px;
+
+        font-size: 0.95rem;
+
+        box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+    }
+
+    .btn-add:hover {
+        background-color: var(--primary-hover);
+    }
+
+    .btn-edit {
+        background-color: var(--warning-color);
+
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background-color: var(--warning-hover);
+    }
+
+    .btn-delete {
+        background-color: var(--danger-color);
+
+        color: white;
+    }
+
+    .btn-delete:hover {
+        background-color: var(--danger-hover);
+    }
+
+    .btn-artist {
+        background-color: #6366f1;
+
+        color: white;
+    }
+
+    .btn-artist:hover {
+        background-color: #4f46e5;
+    }
+
+    /* RODAPÉ */
+
+    .footer-actions {
+        display: flex;
+
+        gap: 12px;
+
+        padding-top: 10px;
+
+        border-top: 1px solid var(--border-color);
+    }
+
+    .footer-actions .btn {
+        flex: 1;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 700px) {
+
+        .container {
+            padding: 22px;
+        }
+
+        .header {
+            align-items: flex-start;
+        }
+
+        ul.album-list li {
+            flex-direction: column;
+
+            align-items: stretch;
+        }
+
+        .album-cover,
+        .album-cover-placeholder {
+            width: 120px;
+            height: 120px;
+
+            align-self: center;
+        }
+
+        .album-info {
+            text-align: center;
+        }
+
+        .actions {
+            justify-content: center;
+        }
+
+        .footer-actions {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 450px) {
+
+        body {
+            padding: 15px 10px;
+        }
+
+        .container {
+            padding: 18px;
+            border-radius: 14px;
+        }
+
+        .header h1 {
+            font-size: 1.4rem;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .actions .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <div class="header">
+
+        <div>
+            <h1>🎵 Lista de Álbuns</h1>
+
+            <p>Gerenciamento da sua coleção musical</p>
+        </div>
+
+        <div class="header-icon">
+            ♪
+        </div>
+
+    </div>
+
+
+    <ul class="album-list">
+
+        {{#vetAlbum}}
+
+        <li>
+
+            {{#capaEncode}}
+
+                <img
+                    class="album-cover"
+                    src="data:image/jpeg;base64,{{capaEncode}}"
+                    alt="Capa do álbum {{titulo}}"
+                >
+
+            {{/capaEncode}}
+
+            {{^capaEncode}}
+
+                <div class="album-cover-placeholder">
+                    Sem capa
+                </div>
+
+            {{/capaEncode}}
+
+
+            <div class="album-info">
+
+                <span class="album-title">
+                    {{titulo}}
+                </span>
+
+                <div class="album-details">
+
+                    <strong>Gênero:</strong>
+                    {{genero.nome}}
+
+                    <br>
+
+                    <strong>Artistas:</strong>
+                    {{artistasToString}}
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <a
+                    href="/albuns/tela_alterar/{{id}}"
+                    class="btn btn-edit">
+                    Alterar
+                </a>
+
+                <a
+                    href="/albuns/excluir/{{id}}"
+                    class="btn btn-delete">
+                    Excluir
+                </a>
+
+                <a
+                    href="/albuns/tela_adicionar_artista/{{id}}"
+                    class="btn btn-artist">
+                    + Artista
+                </a>
+
+                <a
+                    href="/albuns/tela_remover_artista/{{id}}"
+                    class="btn btn-delete">
+                    − Artista
+                </a>
+
+            </div>
+
+        </li>
+
+        {{/vetAlbum}}
+
+    </ul>
+
+
+    <div class="footer-actions">
+
+        <a
+            href="/albuns/tela_adicionar"
+            class="btn btn-add">
+            + Adicionar Álbum
+        </a>
+
+        <a
+            href="/albuns/"
+            class="btn btn-add">
+            🎵 Álbuns
+        </a>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
