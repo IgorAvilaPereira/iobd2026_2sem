@@ -12,18 +12,18 @@ import persistencia.GeneroDAO;
 /**
  * GeneroController
  */
-public class GeneroController {
+public class GeneroController extends Controller{
 
     public GeneroController(JavalinConfig config) {
          config.routes.get("/generos/", ctx -> {
             ArrayList<Genero> vet = new GeneroDAO().listar();
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("vetGenero", vet);
-            ctx.render("/templates/generos/index.html", map);
+            ctx.render(PATH_TEMPLATES+"generos/index.html", map);
         });
 
         config.routes.get("/generos/tela_adicionar", ctx -> {
-            ctx.render("/templates/generos/tela_adicionar.html");
+            ctx.render(PATH_TEMPLATES+"generos/tela_adicionar.html");
         });
 
         config.routes.get("/generos/tela_alterar/{id}", ctx -> {
@@ -31,7 +31,7 @@ public class GeneroController {
             Genero genero = new GeneroDAO().obter(id);
             Map<String, Object> map = new HashMap<>();
             map.put("genero", genero);
-            ctx.render("/templates/generos/tela_alterar.html", map);
+            ctx.render(PATH_TEMPLATES+"generos/tela_alterar.html", map);
         });
 
         config.routes.post("/generos/alterar", ctx -> {

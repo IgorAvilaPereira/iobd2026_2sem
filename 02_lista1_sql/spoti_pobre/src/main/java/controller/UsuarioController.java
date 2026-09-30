@@ -12,18 +12,18 @@ import persistencia.UsuarioDAO;
 /**
  * UsuarioController
  */
-public class UsuarioController {
+public class UsuarioController extends Controller {
 
     public UsuarioController(JavalinConfig config) {
         config.routes.get("/", ctx -> {
             ArrayList<Usuario> vet = new UsuarioDAO().listar();
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("vetUsuario", vet);
-            ctx.render("/templates/index.html", map);
+            ctx.render(PATH_TEMPLATES+"index.html", map);
         });
 
         config.routes.get("/usuarios/tela_adicionar", ctx -> {
-            ctx.render("/templates/usuarios/tela_adicionar.html");
+            ctx.render(PATH_TEMPLATES+"usuarios/tela_adicionar.html");
         });
 
         config.routes.get("/usuarios/tela_alterar/{id}", ctx -> {
@@ -31,7 +31,7 @@ public class UsuarioController {
             Usuario usuario = new UsuarioDAO().obter(id);
             Map<String, Object> map = new HashMap<>();
             map.put("usuario", usuario);
-            ctx.render("/templates/usuarios/tela_alterar.html", map);
+            ctx.render(PATH_TEMPLATES+"usuarios/tela_alterar.html", map);
         });
 
         config.routes.post("/usuarios/alterar", ctx -> {

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Remover Artistas</title>
+
+<style>
+
+    :root {
+        --bg-color: #f4f6f9;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+
+        --danger-color: #ef4444;
+        --danger-hover: #dc2626;
+
+        --border-color: #e5e7eb;
+        --muted-color: #6b7280;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        background: linear-gradient(135deg, #f4f6f9, #eef2ff);
+
+        color: var(--text-color);
+
+        margin: 0;
+
+        padding: 40px 20px;
+
+        min-height: 100vh;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 100%;
+
+        max-width: 520px;
+
+        background-color: var(--card-bg);
+
+        padding: 32px;
+
+        border-radius: 18px;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* CABEÇALHO */
+
+    .header {
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+
+        margin-bottom: 28px;
+
+        padding-bottom: 20px;
+
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-icon {
+        width: 48px;
+
+        height: 48px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 12px;
+
+        background: #fef2f2;
+
+        color: var(--danger-color);
+
+        font-size: 1.4rem;
+    }
+
+    .header h1 {
+        margin: 0;
+
+        font-size: 1.6rem;
+
+        color: #111827;
+    }
+
+    .header p {
+        margin: 5px 0 0;
+
+        color: var(--muted-color);
+
+        font-size: 0.9rem;
+    }
+
+    /* LISTA DE ARTISTAS */
+
+    .form-group {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+
+        font-weight: 600;
+
+        color: #374151;
+    }
+
+    .artist-list {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        max-height: 300px;
+
+        overflow-y: auto;
+
+        padding: 4px;
+    }
+
+    .artist-option {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        padding: 12px 14px;
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 9px;
+
+        background-color: #ffffff;
+
+        cursor: pointer;
+
+        transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .artist-option:hover {
+        background-color: #fef2f2;
+
+        border-color: #fecaca;
+    }
+
+    .artist-option input {
+        width: 18px;
+
+        height: 18px;
+
+        accent-color: var(--danger-color);
+
+        cursor: pointer;
+    }
+
+    .artist-option span {
+        font-size: 0.95rem;
+
+        color: #374151;
+
+        font-weight: 500;
+    }
+
+    .artist-option:has(input:checked) {
+        background-color: #fef2f2;
+
+        border-color: #fca5a5;
+
+        box-shadow: 0 2px 6px rgba(239, 68, 68, 0.08);
+    }
+
+    /* AVISO */
+
+    .warning {
+        margin-top: 15px;
+
+        padding: 12px 14px;
+
+        border-radius: 9px;
+
+        background-color: #fff7ed;
+
+        border: 1px solid #fed7aa;
+
+        color: #9a3412;
+
+        font-size: 0.85rem;
+
+        line-height: 1.4;
+    }
+
+    /* BOTÕES */
+
+    .actions {
+        display: flex;
+
+        gap: 10px;
+
+        margin-top: 22px;
+    }
+
+    .btn {
+        flex: 1;
+
+        padding: 12px 18px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        font-size: 0.95rem;
+
+        font-weight: 600;
+
+        text-align: center;
+
+        text-decoration: none;
+
+        cursor: pointer;
+
+        transition:
+            background-color 0.2s ease,
+            transform 0.1s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .btn:active {
+        transform: scale(0.97);
+    }
+
+    .btn-danger {
+        background-color: var(--danger-color);
+
+        color: white;
+
+        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.18);
+    }
+
+    .btn-danger:hover {
+        background-color: var(--danger-hover);
+    }
+
+    .btn-secondary {
+        background-color: #f3f4f6;
+
+        color: #4b5563;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e5e7eb;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 500px) {
+
+        body {
+            padding: 20px 10px;
+        }
+
+        .container {
+            padding: 22px;
+
+            border-radius: 14px;
+        }
+
+        .header h1 {
+            font-size: 1.4rem;
+        }
+
+        .actions {
+            flex-direction: column;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="header-icon">
+            🗑️
+        </div>
+
+        <div>
+
+            <h1>Remover Artistas</h1>
+
+            <p>Selecione os artistas que deseja remover do álbum</p>
+
+        </div>
+
+    </div>
+
+
+    <form
+        action="/albuns/remover_artista"
+        method="post"
+    >
+
+        <input
+            type="hidden"
+            name="id"
+            value="{{id}}"
+        >
+
+
+        <div class="form-group">
+
+            <span class="form-label">
+                Artistas do álbum
+            </span>
+
+
+            <div class="artist-list">
+
+                {{#vetArtista}}
+
+                <label class="artist-option">
+
+                    <input
+                        type="checkbox"
+                        name="vetArtista"
+                        value="{{id}}"
+                    >
+
+                    <span>
+                        {{nome}}
+                    </span>
+
+                </label>
+
+                {{/vetArtista}}
+
+            </div>
+
+        </div>
+
+
+        <div class="warning">
+            ⚠️ Os artistas selecionados serão removidos do álbum.
+            Essa ação pode não ser reversível.
+        </div>
+
+
+        <div class="actions">
+
+            <a
+                href="/albuns/"
+                class="btn btn-secondary"
+            >
+                Voltar
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-danger"
+            >
+                − Remover Selecionados
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</body>
+
+</html>

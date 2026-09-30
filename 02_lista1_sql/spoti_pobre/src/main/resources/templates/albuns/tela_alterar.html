@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Albuns</title>
+    <title>Alterar Albuns</title>
     <style>
         :root {
             --bg-color: #f4f6f9;
@@ -124,37 +124,72 @@
             color: var(--secondary-hover);
         }
     </style>
+
+    <script>
+        function verifica(input_file) {
+            if (input_file.value != null) {
+                document.getElementById("maroto").checked = false;
+            }
+        }
+    </script>
 </head>
 
 <body>
     <div class="container">
-        <h1>Adicionar Albuns</h1>
+        <h1>Alterar Albuns</h1>
 
-        <form action="/albuns/adicionar" method="post" enctype="multipart/form-data">
+        <form action="/albuns/alterar" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{album.id}}">
+
             <div class="form-group">
                 <label for="titulo">Nome</label>
-                <input type="text" id="titulo" name="titulo" placeholder="Digite titulo" required>
+                <input type="text" id="titulo" name="titulo" placeholder="Digite titulo" required value="{{album.titulo}}">
             </div>
 
             <div class="form-group">
-                <label for="capa">Capa</label>
-                <input type="file" id="capa" name="capa" placeholder="Selecione a capa">
+                <label for="capa">Capa </label>
+                 {{#album.capaEncode}}
+                <input id="maroto" type="checkbox" name="manter_capa" value="true" checked>Deseja manter a capa original?
+                <img
+                    class="album-cover"
+                    src="data:image/jpeg;base64,{{album.capaEncode}}"
+                    alt="Capa do álbum {{album.titulo}}"
+                >
+
+            {{/album.capaEncode}}
+
+            <!-- {{^album.capaEncode}}
+
+                <div class="album-cover-placeholder">
+                    Sem capa
+                </div>
+
+            {{/album.capaEncode}} -->
+               
+                <input onchange="verifica(this)" type="file" id="capa" name="capa" placeholder="Selecione a capa">
             </div>
 
             <div class="form-group">
                 <label for="Data Lancamento">Data Lancamento</label>
-                <input type="date" id="data" name="data_lancamento" required>
+                <input type="date" id="data" name="data_lancamento" required value="{{album.dataLancamento}}">
             </div>
 
                 <select name="genero_id">
              {{#vetGenero}}
+              
+                             {{#isEhGenero}}
+                <option value="{{id}}" selected>{{nome}}</option>
+    {{/isEhGenero}}
+
+  {{^isEhGenero}}
                     <option value="{{id}}">{{nome}}</option>
+                     {{/isEhGenero}}
               {{/vetGenero}}
               </select>
           
             <div class="actions">
                 <a href="/albuns/" class="btn btn-back">Voltar</a>
-                <button type="submit" class="btn btn-submit">Adicionar</button>
+                <button type="submit" class="btn btn-submit">Alterar</button>
             </div>
         </form>
     </div>

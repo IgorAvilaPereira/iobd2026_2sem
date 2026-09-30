@@ -76,6 +76,8 @@ CREATE TABLE album (
     data_lancamento date,
     genero_id integer references genero (id)
 );
+-- add 29/09
+ ALTER TABLE album ADD COLUMN capa bytea;
 
 CREATE TABLE album_musica (
     album_id integer references album (id),

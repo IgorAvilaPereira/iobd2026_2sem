@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -81,6 +82,35 @@ public class ArtistaDAO {
         conexao.close();
         return nroLinhasAfetadas == 1;
 
+    }
+
+    public ArrayList<Artista> listar(int album_id) throws SQLException {
+        ArrayList<Artista> vetArtista = new ArrayList<Artista>();
+        String sql = "SELECT * FROM artista where id in (select artista_id from album_artista where album_id = ?) ORDER BY id;";
+        Connection conexao = new ConexaoPostgreSQL().getConexao();
+        PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
+        instrucaoSQL.setInt(1, album_id);
+        ResultSet rs = instrucaoSQL.executeQuery();
+        while (rs.next()) {
+            Artista artista = new Artista();
+            artista.setId(rs.getInt("id"));
+            artista.setNome(rs.getString("nome"));
+            vetArtista.add(artista);
+        }
+        conexao.close();
+        return vetArtista;
+     
+    }
+
+    public boolean removerArtista(int artista_id, int album_id) throws SQLException {
+       String sql = "DELETE FROM album_artista where artista_id = ? and album_id = ?;";
+        Connection conexao = new ConexaoPostgreSQL().getConexao();
+        PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
+        instrucaoSQL.setInt(1, artista_id);
+        instrucaoSQL.setInt(2, album_id);
+        int nroLinhasAfetadas = instrucaoSQL.executeUpdate();
+        conexao.close();
+        return nroLinhasAfetadas == 1;
     }
 
 }

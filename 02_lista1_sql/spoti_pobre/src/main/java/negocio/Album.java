@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.Controller;
+
 /**
  * Album
  */
@@ -13,6 +15,7 @@ public class Album {
     private LocalDate dataLancamento;
     private Genero genero;
     private List<Artista> artistas;
+    private byte[] capa;
 
     public Album() {
         this.genero = new Genero();
@@ -59,12 +62,28 @@ public class Album {
         this.artistas = artistas;
     }
 
+    
+
     public String artistasToString() {
         String resultado = "";
         for (Artista artista : artistas) {
             resultado += artista.getNome() + ";";
         }
         return resultado.isBlank() ? "sem artista" : resultado;
+    }
+
+    public byte[] getCapa() {
+        return capa;
+    }
+
+    public void setCapa(byte[] capa) {
+        this.capa = capa;
+    }
+
+    public String capaEncode() {
+        if (capa != null)
+            return Controller.encodeToBase64(capa);
+        return null;
     }
 
 }

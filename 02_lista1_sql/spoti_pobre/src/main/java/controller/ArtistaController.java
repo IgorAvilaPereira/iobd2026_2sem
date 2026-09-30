@@ -12,18 +12,18 @@ import persistencia.ArtistaDAO;
 /**
  * ArtistaController
  */
-public class ArtistaController {
+public class ArtistaController extends Controller{
 
     public ArtistaController(JavalinConfig config) {
          config.routes.get("/artistas/", ctx -> {
             ArrayList<Artista> vet = new ArtistaDAO().listar();
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("vetArtista", vet);
-            ctx.render("/templates/artistas/index.html", map);
+            ctx.render(PATH_TEMPLATES+"artistas/index.html", map);
         });
 
         config.routes.get("/artistas/tela_adicionar", ctx -> {
-            ctx.render("/templates/artistas/tela_adicionar.html");
+            ctx.render(PATH_TEMPLATES+"artistas/tela_adicionar.html");
         });
 
         config.routes.get("/artistas/tela_alterar/{id}", ctx -> {
@@ -31,7 +31,7 @@ public class ArtistaController {
             Artista artista = new ArtistaDAO().obter(id);
             Map<String, Object> map = new HashMap<>();
             map.put("artista", artista);
-            ctx.render("/templates/artistas/tela_alterar.html", map);
+            ctx.render(PATH_TEMPLATES+"artistas/tela_alterar.html", map);
         });
 
         config.routes.post("/artistas/alterar", ctx -> {

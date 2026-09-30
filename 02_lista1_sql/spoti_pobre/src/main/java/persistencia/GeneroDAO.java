@@ -22,6 +22,7 @@ public class GeneroDAO {
             Genero genero = new Genero();
             genero.setId(rs.getInt("id"));
             genero.setNome(rs.getString("nome"));
+    
             vetGenero.add(genero);
         }
         conexao.close();
