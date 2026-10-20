@@ -118,11 +118,11 @@ Atividade
 
 **Assuntos - 2º bim.:**
 
-* [UUID](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#uuid)
+* [UUID](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/dicas/dicas.md#uuid)
 
-* [JSON](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#json)
+* [JSON](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/dicas/dicas.md#json)
 
-* [Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
+* [Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
 
 * [Indices](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/11_heranca_json_postgresql/indices.md)
 
