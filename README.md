@@ -108,9 +108,6 @@ playlist javalin - https://www.youtube.com/playlist?list=PLvT8P1q6jMWdpBu0vENPe4
 ## [./10_atividade_avaliada1](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./10_atividade_avaliada1) <br>
 Atividade
 ## [./11_heranca_json_postgresql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./11_heranca_json_postgresql) <br>
-[agenda.sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/agenda.sql) <br>
-[aula.sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/aula.sql) <br>
-[exemplo.sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplo.sql) <br>
 [exemplo-transformacao-er-relacional-heranca.dia](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplo-transformacao-er-relacional-heranca.dia) <br>
 [exemplo-transformacao-er-relacional-heranca.png](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplo-transformacao-er-relacional-heranca.png) <br>
 [heranca_postgresql.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/heranca_postgresql.md) <br>
@@ -243,3 +240,4 @@ Essa abordagem suporta 100% de:
 &nbsp;
 
 [Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./10_heranca_postgresql)
+[exemplos](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplos) <br>
