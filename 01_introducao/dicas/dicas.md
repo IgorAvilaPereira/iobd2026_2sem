@@ -3,7 +3,7 @@
 ## Operadores 
 
    * **Lógicos** and or not = <> != < <= > >=
-
+fjson
    * **Númericos, inteiros e reais:** + - * / % ^ between
 
 ##  Funções Numéricas
@@ -66,6 +66,35 @@ select substr(nome, 1, 3) from usuario;
   * https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/
   * https://www.enterprisedb.com/blog/processing-postgresql-json-jsonb-data-java
   * https://www.baeldung.com/gson-exclude-fields-serialization
+
+```sql
+
+-- tabela com json
+CREATE TABLE dados_json (
+    id serial primary key,
+    dados json
+);
+-- inserts com json
+INSERT INTO dados_json(dados) values ('{"nome": "Igor", "email": "igor.pereira@riogrande.ifrs.edu.br"}');
+
+INSERT INTO dados_json(dados) values ('{"nome": "Igor", "email": "emaildoigor@mikrus.com"}');
+
+-- trabalho select com coluna json
+SELECT dados ->> 'nome' FROM dados_json;
+
+SELECT * FROM dados_json where dados ->> 'nome' = 'Igor';
+
+SELECT * FROM dados_json where dados -> 'nome' = 'Igor';
+
+CREATE VIEW visao AS SELECT * FROM dados_json where dados ->> 'nome' = 'Igor';
+
+SELECT * FROM visao;
+
+-- add nova propriedade
+UPDATE dados_json
+SET dados = dados::jsonb || '{"cidade": "Rio Grande"}'::jsonb WHERE id = 1;
+
+```
 
 
 ## Type
@@ -151,32 +180,18 @@ create table tabela2 (
 * https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-uuid/
 
 ```sql
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- tabela com json
-CREATE TABLE dados_json (
-    id serial primary key,
-    dados json
+SELECT uuid_generate_v4();
+
+CREATE TABLE contacts (
+    contact_id uuid DEFAULT gen_random_uuid(),
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL,
+    phone VARCHAR,
+    PRIMARY KEY (contact_id)
 );
--- inserts com json
-INSERT INTO dados_json(dados) values ('{"nome": "Igor", "email": "igor.pereira@riogrande.ifrs.edu.br"}');
-
-INSERT INTO dados_json(dados) values ('{"nome": "Igor", "email": "emaildoigor@mikrus.com"}');
-
--- trabalho select com coluna json
-SELECT dados ->> 'nome' FROM dados_json;
-
-SELECT * FROM dados_json where dados ->> 'nome' = 'Igor';
-
-SELECT * FROM dados_json where dados -> 'nome' = 'Igor';
-
-CREATE VIEW visao AS SELECT * FROM dados_json where dados ->> 'nome' = 'Igor';
-
-SELECT * FROM visao;
-
--- add nova propriedade
-UPDATE dados_json
-SET dados = dados::jsonb || '{"cidade": "Rio Grande"}'::jsonb WHERE id = 1;
-
 ```
 
 ***
