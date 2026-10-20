@@ -8,7 +8,7 @@
 
 * [Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
 
-* [Indices](https://github.com/IgorAvilaPereira/iobd2026_2sem/edit/main/11_heranca_json_postgresql/indices.md)
+* [Indices](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/11_heranca_json_postgresql/indices.md)
 
 * DCL
 
@@ -122,4 +122,4 @@ Essa abordagem suporta 100% de:
 
 &nbsp;
 
-[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./10_heranca_postgresql)
+[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./11_heranca_postgresql)
