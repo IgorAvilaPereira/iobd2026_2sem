@@ -114,16 +114,23 @@ Atividade
 [exemplo-transformacao-er-relacional-heranca.dia](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplo-transformacao-er-relacional-heranca.dia) <br>
 [exemplo-transformacao-er-relacional-heranca.png](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplo-transformacao-er-relacional-heranca.png) <br>
 [heranca_postgresql.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/heranca_postgresql.md) <br>
+[ideias_spoti_pobre_heranca_json.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/ideias_spoti_pobre_heranca_json.md) <br>
 [indices.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/indices.md) <br>
 [json.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/json.md) <br>
 [operadores_json.png](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/operadores_json.png) <br>
 &nbsp;
 
-[UUID](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#uuid)
+**Assuntos:**
 
-[Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
+* [UUID](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#uuid)
 
-[JSON](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#json)
+* [JSON](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#json)
+
+* [Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
+
+* [Indices](https://github.com/IgorAvilaPereira/iobd2026_2sem/edit/main/11_heranca_json_postgresql/indices.md)
+
+* DCL
 
 **Videos:**
 
