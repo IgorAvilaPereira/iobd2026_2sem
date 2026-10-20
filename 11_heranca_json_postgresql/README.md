@@ -1,10 +1,16 @@
 &nbsp;
 
-[UUID](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#uuid)
+**Assuntos:**
 
-[Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
+* [UUID](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#uuid)
 
-[JSON](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#json)
+* [Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
+
+* [JSON](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#json)
+
+* Indices
+
+* DCL
 
 **Videos:**
 
