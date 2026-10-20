@@ -1,6 +1,6 @@
 &nbsp;
 
-**Assuntos:**
+**Assuntos - 2º bim.:**
 
 * [UUID](https://github.com/IgorAvilaPereira/iobd2026_1sem/blob/main/01_introducao/dicas/dicas.md#uuid)
 
