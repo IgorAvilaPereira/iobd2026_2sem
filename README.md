@@ -108,7 +108,6 @@ playlist javalin - https://www.youtube.com/playlist?list=PLvT8P1q6jMWdpBu0vENPe4
 ## [./10_atividade_avaliada1](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./10_atividade_avaliada1) <br>
 Atividade
 ## [./11_heranca_json_postgresql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./11_heranca_json_postgresql) <br>
-[exemplo-transformacao-er-relacional-heranca.dia](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplo-transformacao-er-relacional-heranca.dia) <br>
 [exemplo-transformacao-er-relacional-heranca.png](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplo-transformacao-er-relacional-heranca.png) <br>
 [heranca_postgresql.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/heranca_postgresql.md) <br>
 [ideias_spoti_pobre_heranca_json.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/ideias_spoti_pobre_heranca_json.md) <br>
