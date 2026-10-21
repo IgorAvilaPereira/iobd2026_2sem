@@ -1,19 +1,19 @@
 package apresentacao;
 
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.Set;
 
-import controller.*;
+import controller.AlbumController;
+import controller.ArtistaController;
+import controller.GeneroController;
+import controller.UsuarioController;
 import io.javalin.Javalin;
-import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinMustache;
 
 public class Main {    
     public static void main(String[] args) throws SQLException {
         Javalin.create(config -> {
             config.fileRenderer(new JavalinMustache());
-//             config.staticFiles.add(staticFiles -> {
+            // config.staticFiles.add("/static", Location.CLASSPATH);
 //     staticFiles.hostedPath = "/";                   // change to host files on a subpath, like '/assets'
 //     staticFiles.directory = Controller.PATH_PUBLIC;              // the directory where your files are located
 //     staticFiles.location = Location.CLASSPATH;      // Location.CLASSPATH (jar) or Location.EXTERNAL (file system)

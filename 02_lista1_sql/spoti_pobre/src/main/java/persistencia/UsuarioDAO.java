@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import negocio.Usuario;
 
@@ -26,6 +27,7 @@ public class UsuarioDAO {
             usuario.setEmail(rs.getString("email"));
             usuario.setNome(rs.getString("nome"));
             // usuario.setSenha(rs.getString("senha"));
+            usuario.setHashID(UUID.fromString(rs.getString("hash_id")));
             vetUsuario.add(usuario);
         }
         conexao.close();
@@ -45,6 +47,8 @@ public class UsuarioDAO {
             usuario.setEmail(rs.getString("email"));
             usuario.setNome(rs.getString("nome"));
             usuario.setSenha(rs.getString("senha"));
+            usuario.setHashID(UUID.fromString(rs.getString("hash_id")));
+
         }
         conexao.close();
         return usuario;
@@ -65,16 +69,19 @@ public class UsuarioDAO {
     }
 
     public void deletar(int id) throws SQLException {
-        String sql = "BEGIN;" +
-                "DELETE FROM reproducao WHERE usuario_id = ?;" +
-                "DELETE FROM usuario_playlist WHERE usuario_id = ?;" +
-                "DELETE FROM usuario WHERE id = ?;" +
-                "COMMIT;";
+        String sql = "BEGIN;"
+                + "DELETE FROM reproducao WHERE usuario_id = ?;"
+                + "DELETE FROM usuario_playlist WHERE usuario_id = ?;"
+                +" DELETE FROM usuario_playlist WHERE usuario_premium_id = ?;"
+                + "DELETE FROM usuario WHERE id = ?;"
+                + "COMMIT;";
         Connection conexao = new ConexaoPostgreSQL().getConexao();
         PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
         instrucaoSQL.setInt(1, id);
         instrucaoSQL.setInt(2, id);
         instrucaoSQL.setInt(3, id);
+                instrucaoSQL.setInt(4, id);
+
 
         instrucaoSQL.execute();
         conexao.close();
@@ -101,6 +108,26 @@ public class UsuarioDAO {
         conexao.close();
         return nroLinhasAfetadas == 1;
 
+    }
+
+    public Usuario obter(UUID uuid) throws SQLException {
+        Usuario usuario = new Usuario();
+        String sql = "SELECT * FROM usuario where hash_id::varchar = ?;";
+        Connection conexao = new ConexaoPostgreSQL().getConexao();
+        PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
+        instrucaoSQL.setString(1, uuid.toString());
+        ResultSet rs = instrucaoSQL.executeQuery();
+        if (rs.next()) {
+            usuario.setId(rs.getInt("id"));
+            usuario.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+            usuario.setEmail(rs.getString("email"));
+            usuario.setNome(rs.getString("nome"));
+            usuario.setSenha(rs.getString("senha"));
+            usuario.setHashID(UUID.fromString(rs.getString("hash_id")));
+
+        }
+        conexao.close();
+        return usuario;
     }
 
 }

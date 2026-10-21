@@ -1,14 +1,17 @@
 package negocio;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Usuario {
-    private int id;
-    private String nome;
-    private String senha;
-    private String email;
-    private LocalDate dataNascimento;
+    protected int id;
+    protected String nome;
+    protected String senha;
+    protected String email;
+    protected LocalDate dataNascimento;
+    protected UUID hashID;
      
+    
 
     public int getId() {
         return id;
@@ -39,6 +42,12 @@ public class Usuario {
     }
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+    public UUID getHashID() {
+        return hashID;
+    }
+    public void setHashID(UUID hashID) {
+        this.hashID = hashID;
     }
 
     

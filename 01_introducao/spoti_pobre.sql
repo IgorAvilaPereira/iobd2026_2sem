@@ -4,6 +4,8 @@ CREATE DATABASE spoti_pobre;
 
 \c spoti_pobre;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE SCHEMA backup;
 
 SET search_path TO public, backup;
@@ -11,7 +13,10 @@ SET search_path TO public, backup;
 CREATE TABLE backup.log (
     id serial primary key, 
     comentario text not null
+    detalhes json 
 );
+
+
 INSERT INTO backup.log (comentario) VALUES('IGOR');
 CREATE VIEW backup.visao_no_esquema_backup AS select * from backup.log;
 ALTER TABLE backup.log ADD COLUMN data_hora timestamp default current_timestamp;
@@ -23,7 +28,22 @@ CREATE TABLE usuario (
     senha character varying(200) not null,
     nome character varying(200) not null,
     data_nascimento date
+    hash_id uuid DEFAULT uuid_generate_v4() UNIQUE
 );
+-- se eu desejasse otimizar consultas de tuplas de usuario usando muito a coluna uuid
+CREATE INDEX usuario_hash_id ON usuario USING hash (hash_id);
+
+
+CREATE TABLE usuario_premium (
+    plano text NOT NULL DEFAULT 'individual',
+    valor_mensal numeric(8,2) NOT NULL DEFAULT 19.90,
+    validade date default current_date + interval '30 days'
+) INHERITS (usuario);
+ALTER TABLE usuario_premium ADD CONSTRAINT usuario_premium_pkey PRIMARY KEY (id);
+ALTER TABLE usuario_premium ADD CONSTRAINT usuario_premium_email_unico UNIQUE (email);
+
+INSERT INTO usuario_premium (email, nome, senha, data_nascimento) VALUES
+('tomhardy@terradamafia.com.br', 'Tom Hardy', md5('123'), '1970-01-01');
 
 CREATE TABLE playlist (
     id serial primary key,
@@ -31,14 +51,20 @@ CREATE TABLE playlist (
     data_hora_criacao timestamp default current_timestamp,
     publica boolean default true
 );
+INSERT INTO playlist(nome) VALUES('PLAYLIST DO TOM HARDY') RETURNING id;
 
 CREATE TABLE usuario_playlist (
-    usuario_id integer references usuario (id),
+    id serial primary key,
+    usuario_id integer references usuario (id) ,
     playlist_id integer references playlist (id),
     dono boolean default false,
-    colaborador boolean default false,
-    primary key (usuario_id, playlist_id)
+    colaborador boolean default false
 );
+ALTER TABLE usuario_playlist ADD COLUMN usuario_premium_id INTEGER REFERENCES usuario_premium (id);
+ALTER TABLE usuario_playlist DROP CONSTRAINT usuario_playlist_pkey;
+ALTER TABLE usuario_playlist ALTER COLUMN usuario_id DROP NOT NULL;
+
+INSERT INTO usuario_playlist(usuario_premium_id, playlist_id) VALUES(22, 22);
 
 CREATE TABLE musica (
     id serial primary key,

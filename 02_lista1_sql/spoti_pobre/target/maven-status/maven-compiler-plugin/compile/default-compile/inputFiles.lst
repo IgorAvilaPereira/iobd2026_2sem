@@ -1,0 +1,15 @@
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/apresentacao/Main.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/controller/AlbumController.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/controller/ArtistaController.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/controller/Controller.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/controller/GeneroController.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/controller/UsuarioController.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/negocio/Album.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/negocio/Artista.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/negocio/Genero.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/negocio/Usuario.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/persistencia/AlbumDAO.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/persistencia/ArtistaDAO.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/persistencia/ConexaoPostgreSQL.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/persistencia/GeneroDAO.java
+/home/iapereira/git/iobd2026_2sem/02_lista1_sql/spoti_pobre/src/main/java/persistencia/UsuarioDAO.java
