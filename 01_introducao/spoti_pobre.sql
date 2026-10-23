@@ -12,7 +12,7 @@ SET search_path TO public, backup;
 
 CREATE TABLE backup.log (
     id serial primary key, 
-    comentario text not null
+    comentario text not null,
     detalhes json 
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE usuario (
     email character varying(200) unique not null,
     senha character varying(200) not null,
     nome character varying(200) not null,
-    data_nascimento date
+    data_nascimento date,
     hash_id uuid DEFAULT uuid_generate_v4() UNIQUE
 );
 -- se eu desejasse otimizar consultas de tuplas de usuario usando muito a coluna uuid
