@@ -240,3 +240,6 @@ Essa abordagem suporta 100% de:
 
 [Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./11_heranca_postgresql)
 [exemplos](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./11_heranca_json_postgresql/exemplos) <br>
+## [./12_exercicios_uuid_json_heranca_sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./12_exercicios_uuid_json_heranca_sql) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/12_exercicios_uuid_json_heranca_sql) <br><br>
+&nbsp;
