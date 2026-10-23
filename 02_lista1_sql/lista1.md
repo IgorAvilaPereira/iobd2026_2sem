@@ -1154,6 +1154,277 @@ Utilizando **CTE**, **Views**, **GROUP BY**, **HAVING**, **LEFT JOIN**, **STRING
 
 Liste apenas artistas que possuem pelo menos um álbum e ordene pela quantidade de músicas.
 
+---
+
+# Apostila de SQL PostgreSQL – Exercícios
+
+# Parte 6 – Exercícios 101 a 120
+
+**Tema:** UUID, JSON, Herança de Tabelas, Índices e DCL
+
+**Base de dados:** `spoti_pobre`
+
+**Material de apoio:**
+
+- [UUID](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/dicas/dicas.md#uuid)
+- [JSON](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/dicas/dicas.md#json)
+- [Herança (Especialização/Generalização) de Tabelas no PostgreSQL](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/01_introducao/dicas/dicas.md#heran%C3%A7a-especializa%C3%A7%C3%A3ogeneraliza%C3%A7%C3%A3o-de-tabelas-no-postgresql)
+- [Índices](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/11_heranca_json_postgresql/indices.md)
+
+---
+
+## Parte 6.1 – UUID
+
+### Exercício 101
+
+A tabela `usuario` possui a coluna `hash_id`, do tipo `UUID`, configurada com geração automática por meio da função `uuid_generate_v4()`.
+
+Escreva uma consulta SQL que liste:
+
+- O identificador numérico do usuário;
+- O nome;
+- O e-mail;
+- O UUID (`hash_id`).
+
+Ordene o resultado pelo nome do usuário.
+
+### Exercício 102
+
+Insira um novo usuário na tabela `usuario`, informando nome, e-mail, senha e data de nascimento, mas sem fornecer um valor para `hash_id`.
+
+Em seguida, consulte o registro inserido e verifique se o PostgreSQL gerou automaticamente o UUID.
+
+### Exercício 103
+
+Insira um usuário na tabela `usuario` informando explicitamente um UUID para a coluna `hash_id`.
+
+Depois, consulte o registro para verificar se o valor informado foi armazenado corretamente.
+
+### Exercício 104
+
+Escreva uma consulta que localize um usuário a partir de seu UUID (`hash_id`), em vez de utilizar o identificador numérico `id`.
+
+Explique por que o UUID pode ser utilizado como identificador em aplicações que precisam referenciar registros sem expor diretamente a chave numérica.
+
+### Exercício 105
+
+A tabela `usuario` possui um índice associado à coluna `hash_id`.
+
+Escreva os comandos SQL necessários para:
+
+a) Consultar os índices existentes na tabela `usuario`.
+
+b) Criar um índice B-tree para a coluna `hash_id`, utilizando um nome diferente do índice existente.
+
+c) Remover o índice criado no item anterior.
+
+d) Consultar o plano de execução de uma pesquisa de usuário pelo UUID, utilizando `EXPLAIN`.
+
+---
+
+## Parte 6.2 – JSON
+
+### Exercício 106
+
+A tabela `backup.log`, localizada no schema `backup`, possui a coluna `detalhes`, do tipo `JSON`.
+
+Insira três registros de log com diferentes conteúdos na coluna `detalhes`. Utilize documentos JSON para representar informações como:
+
+- Tipo de operação;
+- Tabela afetada;
+- Usuário responsável;
+- Quantidade de registros afetados.
+
+### Exercício 107
+
+Consulte todos os registros da tabela `backup.log`, exibindo o identificador, o comentário e o conteúdo da coluna `detalhes`.
+
+Ordene os registros pelo identificador.
+
+### Exercício 108
+
+Considerando os documentos JSON inseridos no exercício anterior, escreva uma consulta que extraia o valor da propriedade `operacao` de cada registro.
+
+Exiba o identificador do log, o comentário e o valor extraído.
+
+### Exercício 109
+
+Escreva uma consulta que liste apenas os registros da tabela `backup.log` cuja propriedade `tabela` contenha o valor `usuario`.
+
+Utilize os operadores de extração de JSON do PostgreSQL.
+
+### Exercício 110
+
+Acrescente um novo registro à tabela `backup.log` contendo, no campo `detalhes`, um documento JSON com informações sobre a criação de uma playlist.
+
+O documento deverá conter, no mínimo:
+
+- Nome da playlist;
+- Indicação de que ela é pública;
+- Quantidade inicial de músicas;
+- Identificação do usuário responsável.
+
+Depois, consulte o registro inserido e extraia individualmente essas propriedades.
+
+### Exercício 111
+
+A tabela `backup.log` armazena informações complementares no campo `detalhes`.
+
+Escreva uma consulta que liste os registros que possuem a propriedade `operacao` e outra que liste os registros que não possuem essa propriedade.
+
+Explique a diferença entre uma propriedade inexistente e uma propriedade cujo valor é `null` em um documento JSON.
+
+---
+
+## Parte 6.3 – Herança de Tabelas no PostgreSQL
+
+### Exercício 112
+
+A tabela `usuario_premium` foi criada utilizando `INHERITS (usuario)` e possui as colunas adicionais `plano`, `valor_mensal` e `validade`.
+
+Escreva uma consulta que liste todos os usuários cadastrados, incluindo os registros da tabela `usuario_premium`, exibindo:
+
+- Identificador;
+- Nome;
+- E-mail;
+- Plano;
+- Valor mensal.
+
+Para os usuários que não possuem os atributos específicos de um plano premium, apresente valores adequados para representar a ausência dessas informações.
+
+### Exercício 113
+
+Escreva duas consultas SQL:
+
+a) Uma que liste os registros da tabela `usuario`, incluindo os registros das tabelas que herdam dela.
+
+b) Outra que liste exclusivamente os registros armazenados diretamente na tabela `usuario`, sem incluir os registros das tabelas filhas.
+
+Explique a diferença entre as duas consultas no PostgreSQL.
+
+### Exercício 114
+
+Insira um usuário comum na tabela `usuario` e um usuário premium na tabela `usuario_premium`.
+
+Depois, execute consultas para verificar em quais resultados cada registro aparece.
+
+Considere que `usuario_premium` herda as colunas de `usuario`, mas possui também atributos próprios.
+
+### Exercício 115
+
+A tabela `usuario_premium` possui uma chave primária própria para a coluna `id` e uma restrição `UNIQUE` para `email`.
+
+Realize as seguintes operações:
+
+a) Consulte as restrições definidas na tabela `usuario_premium`.
+
+b) Explique por que a definição de uma chave primária na tabela filha é necessária para estabelecer essa restrição nessa tabela.
+
+c) Analise se as restrições de unicidade definidas separadamente em `usuario` e `usuario_premium` garantem que não existam e-mails repetidos entre as duas tabelas.
+
+d) Explique uma limitação da herança de tabelas do PostgreSQL em relação à integridade referencial e à unicidade entre tabelas relacionadas por herança.
+
+### Exercício 116
+
+Considere a tabela `usuario_premium` e a tabela de relacionamento `usuario_playlist`.
+
+Escreva uma consulta que liste as playlists associadas a usuários premium, exibindo:
+
+- Nome do usuário premium;
+- E-mail;
+- Plano;
+- Nome da playlist;
+- Indicador de proprietário (`dono`);
+- Indicador de colaborador (`colaborador`).
+
+Utilize o relacionamento estabelecido pela coluna `usuario_premium_id`.
+
+---
+
+## Parte 6.4 – Índices
+
+### Exercício 117
+
+Crie um índice B-tree para a coluna `nome` da tabela `musica`.
+
+Em seguida:
+
+a) Consulte o plano de execução de uma pesquisa por nome de música utilizando `EXPLAIN`.
+
+b) Execute uma consulta que pesquise uma música pelo nome.
+
+c) Explique como o índice pode contribuir para o desempenho dessa consulta.
+
+d) Remova o índice criado.
+
+### Exercício 118
+
+A tabela `reproducao` armazena o histórico de músicas reproduzidas pelos usuários.
+
+Crie um índice composto para as colunas `usuario_id` e `quando`.
+
+Em seguida, escreva consultas que pesquisem:
+
+a) Todas as reproduções de um usuário específico.
+
+b) Todas as reproduções de um usuário específico em determinado intervalo de datas.
+
+c) Todas as reproduções realizadas em determinado intervalo de datas, independentemente do usuário.
+
+Utilize `EXPLAIN` para analisar os planos de execução e discuta em quais situações o índice composto pode ser útil.
+
+### Exercício 119
+
+A tabela `playlist_musica` possui uma chave primária composta pelas colunas `playlist_id` e `musica_id`.
+
+Realize as seguintes operações:
+
+a) Consulte os índices existentes na tabela.
+
+b) Explique qual índice é criado automaticamente para dar suporte à chave primária.
+
+c) Analise se uma consulta que pesquisa músicas por `musica_id` pode se beneficiar desse índice.
+
+d) Caso considere necessário, crie um índice adicional para a coluna `musica_id`.
+
+e) Utilize `EXPLAIN` para analisar o plano de execução das consultas antes e depois da criação do índice adicional.
+
+---
+
+## Parte 6.5 – DCL (Data Control Language)
+
+### Exercício 120
+
+Considere a base de dados `spoti_pobre`, que possui informações de usuários, músicas, álbuns, artistas, playlists e reproduções.
+
+Utilizando os comandos DCL do PostgreSQL, implemente uma política de controle de acesso para os seguintes perfis:
+
+- **Administrador:** pode consultar e modificar os dados das tabelas do sistema.
+- **Analista:** pode consultar usuários, músicas, álbuns, artistas, playlists e reproduções, mas não pode modificar os dados.
+- **Responsável pelos logs:** pode consultar e inserir registros na tabela `backup.log`, sem poder modificar ou excluir registros existentes.
+
+Implemente os seguintes requisitos:
+
+a) Crie as roles necessárias para representar os três perfis.
+
+b) Conceda ao administrador as permissões necessárias para consultar, inserir, atualizar e excluir registros das tabelas do schema `public`.
+
+c) Conceda ao analista apenas permissões de consulta nas tabelas indicadas.
+
+d) Conceda ao responsável pelos logs permissões para consultar e inserir registros em `backup.log`, sem conceder permissões de atualização ou exclusão.
+
+e) Conceda as permissões necessárias para que os usuários dessas roles consigam acessar os schemas e utilizar as tabelas correspondentes.
+
+f) Crie usuários de banco de dados para testar os perfis e associe cada usuário à role correspondente.
+
+g) Demonstre, por meio de comandos SQL, operações permitidas e negadas para cada perfil.
+
+h) Utilize `REVOKE` para retirar do analista uma permissão previamente concedida e demonstre o efeito da revogação.
+
+i) Explique a diferença entre criar uma role, conceder privilégios a uma role e associar um usuário a uma role.
+
+**Observação:** diferencie os privilégios sobre o schema dos privilégios sobre as tabelas. Considere também que permissões concedidas sobre tabelas existentes não são automaticamente aplicadas a todas as tabelas criadas futuramente. Analise como `ALTER DEFAULT PRIVILEGES` pode ser utilizado para definir permissões padrão para novos objetos.
+
 
 
 
