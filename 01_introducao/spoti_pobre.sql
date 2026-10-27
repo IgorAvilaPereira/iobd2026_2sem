@@ -1,26 +1,28 @@
 DROP DATABASE IF EXISTS spoti_pobre;
-
 CREATE DATABASE spoti_pobre;
 
+-- plpsql
 \c spoti_pobre;
 
+-- uuid
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+-- DDL
 CREATE SCHEMA backup;
-
 SET search_path TO public, backup;
 
 CREATE TABLE backup.log (
     id serial primary key, 
     comentario text not null,
-    detalhes json 
+    detalhes jsonb 
 );
 
-
+-- DML
 INSERT INTO backup.log (comentario) VALUES('IGOR');
 CREATE VIEW backup.visao_no_esquema_backup AS select * from backup.log;
 ALTER TABLE backup.log ADD COLUMN data_hora timestamp default current_timestamp;
 
+-- DQL
 
 CREATE TABLE usuario (
     id serial primary key,

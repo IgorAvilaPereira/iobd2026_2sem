@@ -236,6 +236,11 @@ UPDATE produtos
 SET dados = jsonb_set(dados, '{garantia}', '"12 meses"', true)
 WHERE nome = 'Monitor';
 ```
+### c) Remover uma chave específica:
+
+```sql
+update backup.log SET detalhes = detalhes - 'idade' where id = 6;
+```
 
 ---
 
