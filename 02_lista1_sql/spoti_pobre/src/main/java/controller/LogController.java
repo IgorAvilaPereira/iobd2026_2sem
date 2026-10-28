@@ -11,7 +11,7 @@ public class LogController extends Controller {
     public LogController(JavalinConfig config) {
         config.routes.get("/logs/{id}", ctx -> {
             try {
-
+                // ctx.json(new LogDAO().obter(UUID.fromString(ctx.pathParam("id"))));  // de orelha
                 ctx.html(new LogDAO().obter(UUID.fromString(ctx.pathParam("id"))).toString());
             } catch (Exception e) {
                 ctx.html("camaro digitou errado");
