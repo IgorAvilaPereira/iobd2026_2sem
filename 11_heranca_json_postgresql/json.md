@@ -242,6 +242,40 @@ WHERE nome = 'Monitor';
 update backup.log SET detalhes = detalhes - 'idade' where id = 6;
 ```
 
+No PostgreSQL, o quarto argumento da função `jsonb_set` é um valor booleano (`create_missing`) que define **se a chave deve ser criada caso ela não exista** no objeto JSON.
+
+O resumo do comportamento é:
+* **`true` (Padrão):** Se a chave já existir, o valor é atualizado. Se a chave **não** existir, ela é criada e o valor é adicionado.
+* **`false`:** Se a chave já existir, o valor é atualizado. Se a chave **não** existir, **nada acontece** (o JSON original permanece igual).
+
+---
+
+### 📊 Comparação Direta
+
+| Valor (`create_missing`) | Se a chave EXISTIR | Se a chave NÃO EXISTIR |
+| :--- | :--- | :--- |
+| **`true`** | Atualiza o valor existente | **Cria a nova chave** com o valor |
+| **`false`** | Atualiza o valor existente | **Ignora** (não altera o JSON) |
+
+---
+
+### 🔍 Analisando os seus exemplos:
+
+#### **Exemplo A (`false`):**
+```sql
+UPDATE produtos SET dados = jsonb_set(dados, '{preco}', '6000', false) WHERE nome = 'Notebook';
+```
+* **O que faz:** Ele só vai alterar o preço para `6000` se a chave `preco` **já existir** dentro do campo `dados` do Notebook. 
+* **Por que usar `false` aqui?** É uma segurança. Se por acaso algum Notebook não tiver a chave `preco` cadastrada, o comando não vai criar essa chave do zero por erro.
+
+#### **Exemplo B (`true`):**
+```sql
+UPDATE produtos SET dados = jsonb_set(dados, '{garantia}', '"12 meses"', true) WHERE nome = 'Monitor';
+```
+* **O que faz:** Ele vai procurar a chave `garantia`. Se ela já existir, muda para `"12 meses"`. Se o Monitor nunca teve essa chave antes, ela **será criada** naquele momento.
+* **Por que usar `true` aqui?** Porque o objetivo explícito é garantir que o Monitor passe a ter a informação de garantia, mesmo que ela nunca tenha sido inserida antes.
+
+
 ---
 
 ## 📊 **7. Criar índice para acelerar buscas**
