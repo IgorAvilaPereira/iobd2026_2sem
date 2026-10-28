@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adicionar Artista</title>
+
+<style>
+
+    :root {
+        --bg-color: #f4f6f9;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+
+        --border-color: #e5e7eb;
+        --muted-color: #6b7280;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        background: linear-gradient(135deg, #f4f6f9, #eef2ff);
+
+        color: var(--text-color);
+
+        margin: 0;
+
+        padding: 40px 20px;
+
+        min-height: 100vh;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 100%;
+
+        max-width: 520px;
+
+        background-color: var(--card-bg);
+
+        padding: 32px;
+
+        border-radius: 18px;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* CABEÇALHO */
+
+    .header {
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+
+        margin-bottom: 28px;
+
+        padding-bottom: 20px;
+
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-icon {
+        width: 48px;
+
+        height: 48px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 12px;
+
+        background: #eef2ff;
+
+        color: var(--primary-color);
+
+        font-size: 1.5rem;
+    }
+
+    .header h1 {
+        margin: 0;
+
+        font-size: 1.6rem;
+
+        color: #111827;
+    }
+
+    .header p {
+        margin: 5px 0 0;
+
+        color: var(--muted-color);
+
+        font-size: 0.9rem;
+    }
+
+    /* FORMULÁRIO */
+
+    form {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    label {
+        font-size: 0.9rem;
+
+        font-weight: 600;
+
+        color: #374151;
+    }
+
+    select {
+        width: 100%;
+
+        padding: 12px 14px;
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 9px;
+
+        background-color: #ffffff;
+
+        color: #374151;
+
+        font-size: 0.95rem;
+
+        outline: none;
+
+        cursor: pointer;
+
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    select:hover {
+        border-color: #c7d2fe;
+    }
+
+    select:focus {
+        border-color: var(--primary-color);
+
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+
+    /* BOTÕES */
+
+    .actions {
+        display: flex;
+
+        gap: 10px;
+
+        margin-top: 5px;
+    }
+
+    .btn {
+        flex: 1;
+
+        padding: 12px 18px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        font-size: 0.95rem;
+
+        font-weight: 600;
+
+        text-align: center;
+
+        text-decoration: none;
+
+        cursor: pointer;
+
+        transition:
+            background-color 0.2s ease,
+            transform 0.1s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .btn:active {
+        transform: scale(0.97);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+
+        color: white;
+
+        box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+        background-color: #f3f4f6;
+
+        color: #4b5563;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e5e7eb;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 500px) {
+
+        body {
+            padding: 20px 10px;
+        }
+
+        .container {
+            padding: 22px;
+
+            border-radius: 14px;
+        }
+
+        .header h1 {
+            font-size: 1.4rem;
+        }
+
+        .actions {
+            flex-direction: column;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="header-icon">
+            🎤
+        </div>
+
+        <div>
+
+            <h1>Adicionar Artista</h1>
+
+            <p>Selecione um artista para adicionar ao álbum</p>
+
+        </div>
+
+    </div>
+
+
+    <form
+        action="/albuns/adicionar_artista"
+        method="post"
+    >
+
+        <input
+            type="hidden"
+            name="id"
+            value="{{id}}"
+        >
+
+
+        <div class="form-group">
+
+            <label for="artista_id">
+                Artista
+            </label>
+
+            <select
+                id="artista_id"
+                name="artista_id"
+                required
+            >
+
+                <option value="">
+                    Selecione um artista...
+                </option>
+
+                {{#vetArtista}}
+
+                <option value="{{id}}">
+                    {{nome}}
+                </option>
+
+                {{/vetArtista}}
+
+            </select>
+
+        </div>
+
+
+        <div class="actions">
+
+            <a
+                href="/albuns/"
+                class="btn btn-secondary"
+            >
+                Voltar
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                + Adicionar Artista
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</body>
+
+</html>
+

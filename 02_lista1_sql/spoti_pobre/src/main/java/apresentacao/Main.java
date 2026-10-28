@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import controller.AlbumController;
 import controller.ArtistaController;
 import controller.GeneroController;
+import controller.LogController;
 import controller.UsuarioController;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinMustache;
@@ -25,6 +26,7 @@ public class Main {
             new ArtistaController(config);
             new GeneroController(config);
             new AlbumController(config);
+            new LogController(config);
         }).start(7070);
     }
 }

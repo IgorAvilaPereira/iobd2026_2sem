@@ -30,6 +30,7 @@ public class AlbumController extends  Controller {
         config.routes.get("/albuns/tela_adicionar", ctx -> {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("vetGenero", new GeneroDAO().listar());
+       
             ctx.render(PATH_TEMPLATES+"albuns/tela_adicionar.html", map);
         });
 

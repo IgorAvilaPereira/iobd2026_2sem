@@ -12,17 +12,11 @@ CREATE SCHEMA backup;
 SET search_path TO public, backup;
 
 CREATE TABLE backup.log (
-    id serial primary key, 
+    id uuid DEFAULT uuid_generate_v4() primary key,
     comentario text not null,
-    detalhes jsonb 
+    detalhes jsonb,
+    data_hora timestamp default current_timestamp
 );
-
--- DML
-INSERT INTO backup.log (comentario) VALUES('IGOR');
-CREATE VIEW backup.visao_no_esquema_backup AS select * from backup.log;
-ALTER TABLE backup.log ADD COLUMN data_hora timestamp default current_timestamp;
-
--- DQL
 
 CREATE TABLE usuario (
     id serial primary key,
