@@ -273,3 +273,16 @@ Essa abordagem suporta 100% de:
 ## [./13_heranca_exercicios_jdbc](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./13_heranca_exercicios_jdbc) <br>
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/13_heranca_exercicios_jdbc) <br><br>
 &nbsp;
+## [./14_dcl](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./14_dcl) <br>
+[album.sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/album.sql) <br>
+[como_criar_e_restaurar_dump.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/como_criar_e_restaurar_dump.md) <br>
+[exemplo.sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/exemplo.sql) <br>
+[exemplos.sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/exemplos.sql) <br>
+[exercicios.sql](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/exercicios.sql) <br>
+[proposta_exercicio.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/proposta_exercicio.md) <br>
+* :fire: https://www.devmedia.com.br/gerenciando-usuarios-e-permissoes-no-postgresql/14301
+
+[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/14_dcl)
+&nbsp;
+[dcl](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/dcl) <br>
+[imagens](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./14_dcl/imagens) <br>
