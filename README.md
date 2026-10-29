@@ -270,3 +270,6 @@ Essa abordagem suporta 100% de:
 <br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/12_exercicios_uuid_json_heranca_sql) <br><br>
 &nbsp;
 [trabalho2.md](https://github.com/IgorAvilaPereira/iobd2026_2sem/blob/main/./12_exercicios_uuid_json_heranca_sql/trabalho2.md) <br>
+## [./13_heranca_exercicios_jdbc](https://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/./13_heranca_exercicios_jdbc) <br>
+<br><br>[Baixar todo o material da aula](https://download-directory.github.io/?url=http://github.com/IgorAvilaPereira/iobd2026_2sem/tree/main/13_heranca_exercicios_jdbc) <br><br>
+&nbsp;
