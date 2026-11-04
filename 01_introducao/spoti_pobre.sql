@@ -661,4 +661,36 @@ SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario r
 
 -- 70) SELECT * FROM album WHERE data_lancamento <= (SELECT MIN(data_lancamento) FROM album);
 
+-- 71)  select * from musica where duracao > any(select duracao from musica);
+
+-- 72) jump
+
+-- 73) 
+
+-- select artista.nome, album.titulo from artista join album_artista on artista.id = album_artista.artista_id JOIN album on album.id = album_artista.album_id;
+
+
+-- WITH cte_artista_album AS (select artista.nome, album.titulo from artista join album_artista on artista.id = album_artista.artista_id JOIN album on album.id = album_artista.album_id) SELECT * FROM cte_artista_album;
+
+-- create view view_artista_album AS select artista.nome, album.titulo from artista join album_artista on artista.id = album_artista.artista_id JOIN album on album.id = album_artista.album_id;
+
+-- 74) WITH cte_playlist_musicas AS (SELECT playlist.id, playlist.nome, coalesce(count(playlist_musica.musica_id), 0) as qtde FROM playlist left join playlist_musica on playlist.id = playlist_musica.playlist_id group by playlist.id, playlist.nome ORDER BY playlist.id) SELECT * FROM cte_playlist_musicas;
+
+-- 75) CREATE VIEW view_artista_album_genero AS SELECT artista.nome AS artista_nome, album.titulo, genero.nome AS genero_nome FROM artista JOIN album_artista ON artista.id = album_artista.artista_id JOIN album ON album.id = album_artista.album_id JOIN genero ON genero.id = album.genero_id; 
+
+-- 76) select * from view_artista_album_genero;
+
+-- 77) CREATE OR REPLACE VIEW view_reproducoes AS select usuario.nome AS usuario_nome, musica.nome as musica_nome, reproducao.quando FROM usuario join reproducao on reproducao.usuario_id = usuario.id join musica on musica.id = reproducao.musica_id;
+
+-- 78) CREATE VIEW view_playlist_qtde_musicas AS SELECT playlist_musica.playlist_id, playlist.nome, count(playlist_musica.musica_id) FROM playlist_musica inner join playlist on playlist.id = playlist_musica.playlist_id group by playlist_musica.playlist_id, playlist.nome;
+
+
+-- 79) select * from view_playlist_qtde_musicas where count >= 2;
+
+CREATE OR REPLACE FUNCTION hello_world(var_nome TEXT) RETURNS TEXT AS
+$$
+BEGIN
+    RETURN 'HELLO '||var_nome;
+END;
+$$ LANGUAGE 'plpgsql';
 
