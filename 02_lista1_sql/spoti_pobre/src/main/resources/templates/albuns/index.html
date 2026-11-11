@@ -444,6 +444,26 @@
                     <strong>Artistas:</strong>
                     {{artistasToString}}
 
+                    {{#musicas}}
+
+                    {{#arquivoEncode}}
+
+
+                <!-- <a href="data:{{materialTipo}};base64,{{arquivoEncode}}">baixar</a> -->
+{{nome}}
+                  <audio controls src="data:{{materialTipo}};base64,{{arquivoEncode}}"></audio>
+
+            {{/arquivoEncode}}
+
+            {{^arquivoEncode}}
+
+                <div class="album-cover-placeholder">
+                    {{nome}} Sem arquivo
+                </div>
+
+            {{/arquivoEncode}}
+
+                    {{/musicas}}
                 </div>
 
             </div>
@@ -470,9 +490,21 @@
                 </a>
 
                 <a
+                    href="/albuns/tela_adicionar_musica/{{id}}"
+                    class="btn btn-artist">
+                    + Musica
+                </a>
+
+                <a
                     href="/albuns/tela_remover_artista/{{id}}"
                     class="btn btn-delete">
                     − Artista
+                </a>
+
+                 <a
+                    href="/albuns/tela_remover_musica/{{id}}"
+                    class="btn btn-delete">
+                    − Música
                 </a>
 
             </div>

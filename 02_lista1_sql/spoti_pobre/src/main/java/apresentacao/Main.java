@@ -6,6 +6,7 @@ import controller.AlbumController;
 import controller.ArtistaController;
 import controller.GeneroController;
 import controller.LogController;
+import controller.MusicaController;
 import controller.UsuarioController;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinMustache;
@@ -27,6 +28,7 @@ public class Main {
             new GeneroController(config);
             new AlbumController(config);
             new LogController(config);
+            new MusicaController(config);
         }).start(7070);
     }
 }

@@ -8,12 +8,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import negocio.Album;
 import negocio.Artista;
 import negocio.Genero;
+import negocio.Musica;
 
 // DAO: Data Acess Object
 public class AlbumDAO {
@@ -35,6 +35,7 @@ public class AlbumDAO {
             genero.setId(rs.getInt("genero_id"));
             genero.setNome(rs.getString("genero_nome"));
             album.setGenero(genero);
+
             PreparedStatement instrucaoArtistasSQL = conexao.prepareStatement(
                     "SELECT id, nome FROM artista join album_artista on artista.id = album_artista.artista_id where album_artista.album_id = ? ");
             instrucaoArtistasSQL.setInt(1, album.getId());
@@ -47,6 +48,23 @@ public class AlbumDAO {
                 vetArtista.add(artista);
             }
             album.setArtistas(vetArtista);
+
+            PreparedStatement instrucaoMusicaSQL = conexao.prepareStatement(
+                    "SELECT id, nome, arquivo, material_tipo, duracao, data_hora_lancamento FROM album_musica join musica on musica.id = album_musica.musica_id where album_musica.album_id = ? ");
+            instrucaoMusicaSQL.setInt(1, album.getId());
+            ResultSet rsMusicas = instrucaoMusicaSQL.executeQuery();
+            ArrayList<Musica> vetMusica = new ArrayList<Musica>();
+            while (rsMusicas.next()) {
+                Musica musica = new Musica();
+                musica.setId(rsMusicas.getInt("id"));
+                musica.setNome(rsMusicas.getString("nome"));
+                musica.setDuracao(rsMusicas.getTime("duracao").toLocalTime());
+                musica.setDataHoraLancamento(rsMusicas.getTimestamp("data_hora_lancamento").toLocalDateTime());
+                musica.setArquivo(rsMusicas.getBytes("arquivo"));
+                musica.setMaterialTipo((rsMusicas.getString("material_tipo") != null) ? rsMusicas.getString("material_tipo") : null);
+                vetMusica.add(musica);
+            }
+            album.setMusicas(vetMusica);
             vetAlbum.add(album);
         }
         conexao.close();
@@ -114,11 +132,11 @@ public class AlbumDAO {
     }
 
     public void deletar(int id) throws SQLException {
-        String sql = "BEGIN;" +
-                "DELETE FROM album_artista WHERE album_id = ? ;" +
-                "DELETE FROM album_musica WHERE album_id = ? ;" +
-                "DELETE FROM album WHERE id = ?;" +
-                "COMMIT;";
+        String sql = "BEGIN;"
+                + "DELETE FROM album_artista WHERE album_id = ? ;"
+                + "DELETE FROM album_musica WHERE album_id = ? ;"
+                + "DELETE FROM album WHERE id = ?;"
+                + "COMMIT;";
         Connection conexao = new ConexaoPostgreSQL().getConexao();
         PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
         instrucaoSQL.setInt(1, id);
@@ -161,8 +179,24 @@ public class AlbumDAO {
         conexao.close();
         return nroLinhasAfetadas == 1;
 
+    }
 
-
+    public boolean adicionarMusica(int album_id, int musica_id) throws SQLException {
+        String sql = "INSERT INTO album_musica (musica_id, album_id) VALUES (?, ?)";
+        int nroLinhasAfetadas;
+        try (Connection conexao = new ConexaoPostgreSQL().getConexao()) {
+            PreparedStatement instrucaoSQL = conexao.prepareStatement(sql);
+            instrucaoSQL.setInt(1, musica_id);
+            instrucaoSQL.setInt(2, album_id);
+            try {
+                nroLinhasAfetadas = instrucaoSQL.executeUpdate();
+            } catch (SQLException e) {
+                conexao.close();
+                System.out.println("deu xabum!");
+                return false;
+            }
+        }
+        return nroLinhasAfetadas == 1;
     }
 
 }

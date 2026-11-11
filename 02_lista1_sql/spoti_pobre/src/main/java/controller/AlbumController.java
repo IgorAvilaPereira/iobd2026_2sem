@@ -12,6 +12,7 @@ import negocio.Genero;
 import persistencia.AlbumDAO;
 import persistencia.ArtistaDAO;
 import persistencia.GeneroDAO;
+import persistencia.MusicaDAO;
 
 /**
  * AlbumController
@@ -85,11 +86,46 @@ public class AlbumController extends  Controller {
             ctx.render(PATH_TEMPLATES+"albuns/tela_adicionar_artista.html", map);
         });
 
+             config.routes.get("/albuns/tela_adicionar_musica/{id}", ctx -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("vetMusica", new MusicaDAO().listar());
+            map.put("id", Integer.parseInt(ctx.pathParam("id")));
+            ctx.render(PATH_TEMPLATES+"albuns/tela_adicionar_musica.html", map);
+        });
+
+          config.routes.post("/albuns/adicionar_musica", ctx -> {
+            int album_id = Integer.parseInt(ctx.formParam("id"));
+            int musica_id = Integer.parseInt(ctx.formParam("musica_id"));            
+            boolean resultado = new AlbumDAO().adicionarMusica(album_id, musica_id);
+            if (resultado == false) {
+                ctx.html("<script>alert('Música ja cadastrado neste mesmo album'); location.href='/albuns/';</script>");
+            } else {
+                ctx.redirect("/albuns/");
+            }
+
+        });
+
          config.routes.get("/albuns/tela_remover_artista/{id}", ctx -> {
             Map<String, Object> map = new HashMap<>();
             map.put("vetArtista", new ArtistaDAO().listar(Integer.parseInt(ctx.pathParam("id"))));
             map.put("id", Integer.parseInt(ctx.pathParam("id")));
             ctx.render(PATH_TEMPLATES+"albuns/tela_remover_artista.html", map);
+        });
+
+          config.routes.get("/albuns/tela_remover_musica/{id}", ctx -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("vetMusica", new MusicaDAO().listar(Integer.parseInt(ctx.pathParam("id"))));
+            map.put("id", Integer.parseInt(ctx.pathParam("id")));
+            ctx.render(PATH_TEMPLATES+"albuns/tela_remover_musica.html", map);
+        });
+
+           config.routes.post("/albuns/remover_musica", ctx -> {
+            int album_id = Integer.parseInt(ctx.formParam("id"));
+            Iterator<String> iterator = ctx.formParams("vetMusica").iterator();   
+            while (iterator.hasNext()) {
+                new MusicaDAO().removerMusica(Integer.parseInt(iterator.next()), album_id);
+            }
+            ctx.redirect("/albuns/");
         });
 
          config.routes.post("/albuns/remover_artista", ctx -> {

@@ -15,11 +15,13 @@ public class Album {
     private LocalDate dataLancamento;
     private Genero genero;
     private List<Artista> artistas;
+    private List<Musica> musicas;
     private byte[] capa;
 
     public Album() {
         this.genero = new Genero();
         this.artistas = new ArrayList<Artista>();
+        this.musicas = new ArrayList<Musica>();
     }
 
     public int getId() {
@@ -86,4 +88,13 @@ public class Album {
         return null;
     }
 
+    public List<Musica> getMusicas() {
+        return musicas;
+    }
+
+    public void setMusicas(List<Musica> musicas) {
+        this.musicas = musicas;
+    }
+
+    
 }

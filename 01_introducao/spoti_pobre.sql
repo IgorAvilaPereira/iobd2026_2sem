@@ -68,6 +68,8 @@ CREATE TABLE musica (
     duracao time,
     data_hora_lancamento timestamp default current_timestamp
 );
+ALTER TABLE musica ADD COLUMN arquivo bytea;
+ALTER TABLE musica ADD COLUMN material_tipo text;
 
 CREATE TABLE playlist_musica (
     playlist_id integer references playlist (id),
