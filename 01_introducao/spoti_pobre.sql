@@ -60,7 +60,7 @@ ALTER TABLE usuario_playlist ADD COLUMN usuario_premium_id INTEGER REFERENCES us
 ALTER TABLE usuario_playlist DROP CONSTRAINT usuario_playlist_pkey;
 ALTER TABLE usuario_playlist ALTER COLUMN usuario_id DROP NOT NULL;
 
-INSERT INTO usuario_playlist(usuario_premium_id, playlist_id) VALUES(22, 22);
+--INSERT INTO usuario_playlist(usuario_premium_id, playlist_id) VALUES(22, 22);
 
 CREATE TABLE musica (
     id serial primary key,
@@ -362,7 +362,6 @@ INSERT INTO usuario_playlist (usuario_id, playlist_id, dono, colaborador) VALUES
 (21, 21, false, true);
 
 INSERT INTO usuario_playlist (usuario_id, playlist_id, dono, colaborador) VALUES
-(1, 1, true, false),
 (2, 2, true, false),
 (3, 3, true, false),
 (4, 4, true, false),
@@ -376,12 +375,7 @@ INSERT INTO usuario_playlist (usuario_id, playlist_id, dono, colaborador) VALUES
 (12, 12, true, false),
 (13, 13, true, false),
 (14, 14, true, false),
-(15, 15, true, false),
-(1, 2, false, true),
-(2, 1, false, true),
-(3, 7, false, true),
-(4, 8, false, true),
-(5, 3, false, true);
+(15, 15, true, false);
 
 -- 10. PLAYLIST_MUSICA
 INSERT INTO playlist_musica (playlist_id, musica_id) VALUES
@@ -408,8 +402,6 @@ INSERT INTO playlist_musica (playlist_id, musica_id) VALUES
 
 -- 11. REPRODUCAO
 INSERT INTO reproducao (musica_id, usuario_id, quando) VALUES
-(1, 1, '2026-07-01 10:00:00'),
-(3, 1, '2026-07-01 10:05:00'),
 (11, 2, '2026-07-02 18:30:00'),
 (7, 3, '2026-07-03 14:15:00'),
 (18, 4, '2026-07-03 20:00:00'),
@@ -426,11 +418,10 @@ INSERT INTO reproducao (musica_id, usuario_id, quando) VALUES
 (20, 15, '2026-07-14 21:00:00'),
 (9, 16, '2026-07-15 10:30:00'),
 (17, 17, '2026-07-16 12:25:00'),
-(5, 18, '2026-07-17 18:45:00'),
-(2, 19, '2026-07-18 01:00:00');
+(5, 18, '2026-07-17 18:45:00');
 
-INSERT INTO reproducao (musica_id, usuario_id, quando) VALUES
-(1, 1, CURRENT_TIMESTAMP);
+--INSERT INTO reproducao (musica_id, usuario_id, quando) VALUES
+--(1, 1, CURRENT_TIMESTAMP);
 
 /*
 select usuario.id, usuario.email, usuario.nome, musica.nome, reproducao.quando FROM usuario INNER JOIN reproducao ON usuario.id = reproducao.usuario_id INNER JOIN musica ON musica.id = reproducao.musica_id where usuario.id = 1;
@@ -525,8 +516,8 @@ select usuario.id, usuario.email, usuario.nome, musica.nome, reproducao.quando F
 
 
 -- 22)
-SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario right JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id right JOIN playlist ON playlist.id = usuario_playlist.playlist_id where usuario.nome is null or dono is true;
-
+--SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario right JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id right JOIN playlist ON playlist.id = usuario_playlist.playlist_id where usuario.nome is null or dono is true;
+--
 
 -- 23)
 -- ja feito
@@ -688,11 +679,11 @@ SELECT usuario.id, usuario.nome, playlist.id, playlist.nome, dono FROM usuario r
 
 
 -- 79) select * from view_playlist_qtde_musicas where count >= 2;
-
-CREATE OR REPLACE FUNCTION hello_world(var_nome TEXT) RETURNS TEXT AS
-$$
-BEGIN
-    RETURN 'HELLO '||var_nome;
-END;
-$$ LANGUAGE 'plpgsql';
+--
+--CREATE OR REPLACE FUNCTION hello_world(var_nome TEXT) RETURNS TEXT AS
+--$$
+--BEGIN
+--    RETURN 'HELLO '||var_nome;
+--END;
+--$$ LANGUAGE 'plpgsql';
 
