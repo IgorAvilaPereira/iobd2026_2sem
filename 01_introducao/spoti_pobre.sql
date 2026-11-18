@@ -687,3 +687,80 @@ select usuario.id, usuario.email, usuario.nome, musica.nome, reproducao.quando F
 --END;
 --$$ LANGUAGE 'plpgsql';
 
+-- 80)
+--WITH tb_resultado AS (SELECT artista.id, artista.nome, count(DISTINCT album_artista.album_id) as qtde_album, count(DISTINCT musica_id) as qtde_musica FROM artista LEFT JOIN album_artista ON artista.id = album_artista.artista_id LEFT JOIN album_musica on album_musica.album_id = album_artista.album_id group by artista.id, artista.nome)
+--select * from tb_resultado where qtde_album >= 1 and qtde_musica >= 2;
+
+-- 81) select album.id, album.titulo, STRING_AGG(musica.nome, ',') as musicas FROM album LEFT JOIN album_musica on album.id = album_musica.album_id LEFT JOIN musica on musica.id = album_musica.musica_id group by album.id, album.titulo order by album.id;
+
+-- 82) select playlist.id, playlist.nome, STRING_AGG(musica.nome, ',') from playlist left join playlist_musica on playlist.id = playlist_musica.playlist_id left join musica on musica.id = playlist_musica.musica_id group by playlist.id, playlist.nome;
+
+
+-- 83) select artista.id, artista.nome, string_agg(album.titulo, ',') as albuns from artista left join album_artista on artista.id = album_artista.artista_id left join album on album.id = album_artista.album_id group by artista.id, artista.nome, album.titulo;
+
+-- 84) select genero.id, genero.nome, string_agg(album.titulo, ',') FROM genero LEFT JOIN album ON genero.id = album.genero_id group by genero.id, genero.nome;
+
+-- 85) select usuario.id, usuario.nome, STRING_AGG(playlist.nome, ',') FROM usuario LEFT JOIN usuario_playlist ON usuario.id = usuario_playlist.usuario_id LEFT JOIN playlist on playlist.id = usuario_playlist.playlist_id GROUP BY usuario.id, usuario.nome;
+
+-- 86) select artista.id, artista.nome, album.id, album.titulo, count(DISTINCT album_musica.musica_id), avg(duracao) FROM artista JOIN album_artista ON artista.id = album_artista.artista_id JOIN album on album.id = album_artista.album_id JOIN album_musica on album.id = album_musica.album_id join musica on musica.id = album_musica.musica_id group by artista.id, artista.nome, album.id, album.titulo;
+
+-- 87) select artista.id, artista.nome, count(DISTINCT album_musica.musica_id) FROM artista LEFT JOIN album_artista on artista.id = album_artista.artista_id LEFT JOIN album on album.id = album_artista.album_id left join album_musica on album_musica.album_id = album.id group by artista.id order by count(distinct album_musica.musica_id) desc, artista.nome limit 5; 
+
+-- considera empate - n define tamanho maximo
+--select artista.id, artista.nome, count(DISTINCT album_musica.musica_id) FROM artista LEFT JOIN album_artista on artista.id = album_artista.artista_id LEFT JOIN album on album.id = album_artista.album_id left join album_musica on album_musica.album_id = album.id group by artista.id, artista.nome having count(distinct album_musica.musica_id) = (select count(DISTINCT album_musica.musica_id) FROM artista LEFT JOIN album_artista on artista.id = album_artista.artista_id LEFT JOIN album on album.id = album_artista.album_id left join album_musica on album_musica.album_id = album.id group by artista.id order by count(distinct album_musica.musica_id) desc limit 1); 
+
+
+-- 88
+
+-- 89
+
+-- 90) SELECT * FROM usuario where id in (select DISTINCT usuario_id from reproducao join album_musica on album_musica.musica_id = reproducao.musica_id join album on album.id = album_musica.album_id join genero on genero.id = album.genero_id where genero.nome = 'MPB');
+
+-- 106)  
+--INSERT INTO backup.log (comentario, detalhes) VALUES
+--('CADASTRO DE USUARIO', '{"operacao": "INSERT", "tabela": "usuario", "qtde": 1}');
+
+-- 107) select * from backup.log ORDER BY data_hora ASC;
+
+-- 108)  SELECT detalhes->>'operacao' as label FROM backup.log;
+-- SELECT detalhes->>'operacao' as label FROM backup.log WHERE detalhes ? 'operacao' is true;
+
+-- 109) select * from backup.log where UPPER(detalhes->>'tabela') = UPPER('usuario');
+
+-- 110) 
+--INSERT INTO backup.log (comentario, detalhes) VALUES
+('nova playlist', '{"operacao": "INSERT", "tabela": "playlist", "qtde": 1, "usuario_id": 2}');
+
+--SELECT detalhes->>'operacao', detalhes->>'tabela', detalhes->>'qtde', detalhes->>'usuario_id' FROM backup.log;
+
+-- 111) SELECT detalhes->>'operacao' as label FROM backup.log WHERE detalhes ? 'operacao' is true;
+
+--spoti_pobre=# SELECT detalhes->>'operacao' as label FROM backup.log WHERE detalhes ? 'operacao' is false; label 
+
+-- 112)
+
+-- 120) 
+CREATE ROLE administrador_spoti;
+CREATE ROLE analista_spoti;
+CREATE ROLE reponsavel_spoti;
+CREATE ROLE alexsia LOGIN PASSWORD '111';
+CREATE ROLE enrico LOGIN PASSWORD '111';
+CREATE ROLE erick LOGIN PASSWORD '111';
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO administrador_spoti;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to administrador_spoti;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO analista_spoti;
+REVOKE USAGE ON SCHEMA backup FROM analista_spoti;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA backup FROM analista_spoti;
+REVOKE SELECT, UPDATE, DELETE, INSERT ON backup.log FROM analista_spoti;
+
+GRANT USAGE ON SCHEMA backup TO reponsavel_spoti;
+GRANT SELECT, UPDATE ON backup.log TO reponsavel_spoti;
+
+GRANT administrador_spoti to erick;
+GRANT analista_spoti to alexsia;
+GRANT reponsavel_spoti TO enrico;
+
+
+
